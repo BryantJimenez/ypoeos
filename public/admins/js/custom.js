@@ -279,6 +279,17 @@ $('#stateCheckbox').change(function(event) {
   }
 });
 
+// funcion para cambiar el input hidden al cambiar el switch de boton
+$('#buttonCheckbox').change(function(event) {
+  if ($(this).is(':checked')) {
+    $('#buttonHidden').val(1);
+    $('#buttonInputs').removeClass('d-none');
+  } else {
+    $('#buttonHidden').val(0);
+    $('#buttonInputs').addClass('d-none');
+  }
+});
+
 //funciones para desactivar y activar usuarios
 function deactiveAdmin(slug) {
   $("#deactiveAdmin").modal();
@@ -290,8 +301,23 @@ function activeAdmin(slug) {
   $('#formActiveAdmin').attr('action', '/admin/administradores/' + slug + '/activar');
 }
 
+function deactiveBanner(slug) {
+  $("#deactiveBanner").modal();
+  $('#formDeactiveBanner').attr('action', '/admin/banners/' + slug + '/desactivar');
+}
+
+function activeBanner(slug) {
+  $("#activeBanner").modal();
+  $('#formActiveBanner').attr('action', '/admin/banners/' + slug + '/activar');
+}
+
 //funciones para preguntar al eliminar
 function deleteAdmin(slug) {
   $("#deleteAdmin").modal();
   $('#formDeleteAdmin').attr('action', '/admin/administradores/' + slug);
+}
+
+function deleteBanner(slug) {
+  $("#deleteBanner").modal();
+  $('#formDeleteBanner').attr('action', '/admin/banners/' + slug);
 }

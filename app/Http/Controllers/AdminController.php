@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\People;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -64,16 +63,6 @@ class AdminController extends Controller
     public function emailVerifyAdmin(Request $request)
     {
         $count=User::where('email', request('email'))->count();
-        if ($count>0) {
-            return "false";
-        } else {
-            return "true";
-        }
-    }
-
-    public function emailVerifyPeople(Request $request)
-    {
-        $count=People::where('email', request('email'))->count();
         if ($count>0) {
             return "false";
         } else {

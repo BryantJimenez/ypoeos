@@ -17,27 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 Route::get('/administradores/email', 'AdminController@emailVerifyAdmin');
-Route::get('/usuarios/email', 'AdminController@emailVerifyPeople');
 
-Route::group(['middleware' => ['login']], function () {
-	Route::get('/ingresar', 'AuthController@loginForm')->name('ingresar');
-	Route::get('/registro', 'AuthController@registerForm')->name('registro');
-	Route::get('/recuperar', 'AuthController@recoveryForm')->name('recuperar');
-	Route::get('/restaurar/{slug}/{token}', 'AuthController@resetForm')->name('restaurar');
-	Route::post('/ingresar', 'AuthController@login')->name('login.custom');
-	Route::post('/registro', 'AuthController@register')->name('register.custom');
-	Route::post('/recuperar', 'AuthController@recovery')->name('recovery.custom');
-	Route::post('/restaurar/{slug}/{token}', 'AuthController@reset')->name('reset.custom');
-});
-
-Route::group(['middleware' => ['session_verify']], function () {
-	Route::group(['middleware' => ['web.session']], function () {
-		Route::post('/salir', 'AuthController@logout')->name('logout.custom');
-	});
-	
-	/////////////////////////////////////////////// WEB ////////////////////////////////////////////////
-	Route::get('/', 'WebController@index')->name('home');
-});
+/////////////////////////////////////////////// WEB ////////////////////////////////////////////////
+Route::get('/', 'WebController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
 	/////////////////////////////////////// ADMIN ///////////////////////////////////////////////////
@@ -58,4 +40,26 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::delete('/admin/administradores/{slug}', 'AdministratorController@destroy')->name('administradores.delete');
 	Route::put('/admin/administradores/{slug}/activar', 'AdministratorController@activate')->name('administradores.activate');
 	Route::put('/admin/administradores/{slug}/desactivar', 'AdministratorController@deactivate')->name('administradores.deactivate');
+
+	// Implementadores
+	Route::get('/admin/implementadores', 'ImplementerController@index')->name('implementadores.index');
+	Route::get('/admin/implementadores/registrar', 'ImplementerController@create')->name('implementadores.create');
+	Route::post('/admin/implementadores', 'ImplementerController@store')->name('implementadores.store');
+	Route::get('/admin/implementadores/{slug}', 'ImplementerController@show')->name('implementadores.show');
+	Route::get('/admin/implementadores/{slug}/editar', 'ImplementerController@edit')->name('implementadores.edit');
+	Route::put('/admin/implementadores/{slug}', 'ImplementerController@update')->name('implementadores.update');
+	Route::delete('/admin/implementadores/{slug}', 'ImplementerController@destroy')->name('implementadores.delete');
+	Route::put('/admin/implementadores/{slug}/activar', 'ImplementerController@activate')->name('implementadores.activate');
+	Route::put('/admin/implementadores/{slug}/desactivar', 'ImplementerController@deactivate')->name('implementadores.deactivate');
+
+	// Banners
+	Route::get('/admin/banners', 'BannerController@index')->name('banners.index');
+	Route::get('/admin/banners/registrar', 'BannerController@create')->name('banners.create');
+	Route::post('/admin/banners', 'BannerController@store')->name('banners.store');
+	Route::get('/admin/banners/{slug}', 'BannerController@show')->name('banners.show');
+	Route::get('/admin/banners/{slug}/editar', 'BannerController@edit')->name('banners.edit');
+	Route::put('/admin/banners/{slug}', 'BannerController@update')->name('banners.update');
+	Route::delete('/admin/banners/{slug}', 'BannerController@destroy')->name('banners.delete');
+	Route::put('/admin/banners/{slug}/activar', 'BannerController@activate')->name('banners.activate');
+	Route::put('/admin/banners/{slug}/desactivar', 'BannerController@deactivate')->name('banners.deactivate');
 });

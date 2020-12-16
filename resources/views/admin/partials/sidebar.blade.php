@@ -4,9 +4,9 @@
         <div class="profile-info">
             <figure class="user-cover-image"></figure>
             <div class="user-info">
-                <img src="{{ asset('/admins/img/logoadmin.png') }}" width="90" height="90" alt="logo">
-                <h6 class="">Nombre</h6>
-                <p class="">Sistema de Gestión</p>
+                <img src="{{ image_exist('/admins/img/admins/', Auth::user()->photo, true) }}" width="90" height="90" alt="logo">
+                <h6 class="">{{ Auth::user()->name." ".Auth::user()->lastname }}</h6>
+                <p class="">{!! typeUser(Auth::user()->type) !!}</p>
             </div>
         </div>
         <div class="shadow-bottom"></div>
@@ -24,6 +24,22 @@
                 <a href="{{ route('administradores.index') }}" aria-expanded="{{ menu_expanded('admin/administradores', 0) }}" class="dropdown-toggle">
                     <div class="">
                         <span><i class="fa fa-user-tie"></i> Administradores</span>
+                    </div>
+                </a>
+            </li>
+
+            <li class="menu {{ active('admin/implementadores', 0) }}">
+                <a href="{{ route('implementadores.index') }}" aria-expanded="{{ menu_expanded('admin/implementadores', 0) }}" class="dropdown-toggle">
+                    <div class="">
+                        <span><i class="fa fa-user"></i> Implementadores</span>
+                    </div>
+                </a>
+            </li>
+
+            <li class="menu {{ active('admin/banners', 0) }}">
+                <a href="{{ route('banners.index') }}" aria-expanded="{{ menu_expanded('admin/banners', 0) }}" class="dropdown-toggle">
+                    <div class="">
+                        <span><i class="fa fa-image"></i> Banners</span>
                     </div>
                 </a>
             </li>

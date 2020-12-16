@@ -369,4 +369,176 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+	// Banners Create
+	$("button[action='banner']").on("click",function(){
+		$("#formBannerCreate").validate({
+			rules:
+			{
+				title: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				text: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				button: {
+					required: true
+				},
+
+				text_button: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				pre_url: {
+					required: true
+				},
+
+				url: {
+					required: false,
+					minlength: 3,
+					maxlength: 191
+				},
+
+				state: {
+					required: true
+				},
+
+				image: {
+					required: true
+				}
+			},
+			messages:
+			{
+				title: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				text: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				button: {
+					required: 'Seleccione una opción.'
+				},
+
+				text_button: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				pre_url: {
+					required: 'Seleccione una opción.'
+				},
+
+				url: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				state: {
+					required: 'Seleccione una opción.'
+				},
+
+				image: {
+					required: 'Seleccione una imagen.'
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='banner']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
+
+	// Banners Edit
+	$("button[action='banner']").on("click",function(){
+		$("#formBannerEdit").validate({
+			rules:
+			{
+				title: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				text: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				button: {
+					required: true
+				},
+
+				text_button: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				pre_url: {
+					required: true
+				},
+
+				url: {
+					required: false,
+					minlength: 3,
+					maxlength: 191
+				},
+
+				state: {
+					required: true
+				}
+			},
+			messages:
+			{
+				title: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				text: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				button: {
+					required: 'Seleccione una opción.'
+				},
+
+				text_button: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				pre_url: {
+					required: 'Seleccione una opción.'
+				},
+
+				url: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				state: {
+					required: 'Seleccione una opción.'
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='banner']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
 });
