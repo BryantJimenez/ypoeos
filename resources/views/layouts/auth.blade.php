@@ -9,6 +9,7 @@
     {{-- <link rel="icon" type="image/x-icon" href="{{ asset('/admins/img/favicon.ico') }}"/> --}}
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
     <link href="{{ asset('/admins/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/admins/css/plugins.css') }}" rel="stylesheet" type="text/css" />
@@ -30,7 +31,6 @@
 
     <script src="{{ asset('/admins/js/authentication/form-2.js') }}"></script>
     <script src="{{ asset('/admins/vendor/validate/jquery.validate.js') }}"></script>
-    <script src="{{ asset('/admins/vendor/validate/messages_es.js') }}"></script>
     <script src="{{ asset('/admins/js/validate.js') }}"></script>
     <script src="{{ asset('/admins/vendor/lobibox/Lobibox.js') }}"></script>
     @include('admin.partials.notifications')

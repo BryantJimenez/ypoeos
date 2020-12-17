@@ -79,7 +79,7 @@ class AdministratorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($slug) {
-        $admin = User::where('slug', $slug)->firstOrFail();
+        $admin=User::where('slug', $slug)->firstOrFail();
         return view('admin.administrators.show', compact('admin'));
     }
 
@@ -117,7 +117,7 @@ class AdministratorController extends Controller
         if ($admin) {
             return redirect()->route('administradores.edit', ['slug' => $slug])->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The administrator has been edited successfully.']);
         } else {
-            return redirect()->route('administradores.edit', ['slug' => $slug])->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.'])->withInputs();
+            return redirect()->route('administradores.edit', ['slug' => $slug])->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 

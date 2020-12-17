@@ -40,7 +40,7 @@
 										<th>#</th>
 										<th>Name</th>
 										<th>Email</th>
-										<th>Disponibilidad</th>
+										<th>Phone</th>
 										<th>State</th>
 										<th>Actions</th>
 									</tr>
@@ -50,21 +50,21 @@
 									<tr>
 										<td>{{ $num++ }}</td>
 										<td class="d-flex">
-											<img src="{{ image_exist('/admins/img/users/', $implementer->photo, true) }}" class="rounded-circle mr-2" width="45" height="45" alt="{{ $implementer->name." ".$implementer->lastname }}"> {{ $implementer->name." ".$implementer->lastname }}
+											<img src="{{ image_exist('/admins/img/admins/', $implementer->photo, true) }}" class="rounded-circle mr-2" width="45" height="45" alt="{{ $implementer->name." ".$implementer->lastname }}"> {{ $implementer->name." ".$implementer->lastname }}
 										</td>
 										<td>{{ $implementer->email }}</td>
-										<td>@if(!is_null($implementer->available()->withTrashed()->first())){{ $implementer->available()->withTrashed()->first()->name }}@else{{ "No ingresado" }}@endif</td>
+										<td>{{ $implementer->phone }}</td>
 										<td>{!! state($implementer->state) !!}</td>
 										<td>
 											<div class="btn-group" role="group">
-												<a href="{{ route('familias.show', ['slug' => $implementer->slug]) }}" class="btn btn-primary btn-sm bs-tooltip" title="Perfil"><i class="fa fa-user"></i></a>
-												<a href="{{ route('familias.edit', ['slug' => $implementer->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Editar"><i class="fa fa-edit"></i></a>
-												{{-- @if($implementer->state==1)
-												<button type="button" class="btn btn-warning btn-sm bs-tooltip" title="Desactivar" onclick="deactiveImplementer('{{ $implementer->slug }}')"><i class="fa fa-power-off"></i></button>
+												<a href="{{ route('implementadores.show', ['slug' => $implementer->slug]) }}" class="btn btn-primary btn-sm bs-tooltip" title="Profile"><i class="fa fa-user"></i></a>
+												<a href="{{ route('implementadores.edit', ['slug' => $implementer->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+												@if($implementer->state==1)
+												<button type="button" class="btn btn-warning btn-sm bs-tooltip" title="Deactivate" onclick="deactiveImplementer('{{ $implementer->slug }}')"><i class="fa fa-power-off"></i></button>
 												@else
-												<button type="button" class="btn btn-success btn-sm bs-tooltip" title="Activar" onclick="activeImplementer('{{ $implementer->slug }}')"><i class="fa fa-check"></i></button>
+												<button type="button" class="btn btn-success btn-sm bs-tooltip" title="Activate" onclick="activeImplementer('{{ $implementer->slug }}')"><i class="fa fa-check"></i></button>
 												@endif
-												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Eliminar" onclick="deleteImplementer('{{ $implementer->slug }}')"><i class="fa fa-trash"></i></button> --}}
+												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Delete" onclick="deleteImplementer('{{ $implementer->slug }}')"><i class="fa fa-trash"></i></button>
 											</div>
 										</td>
 									</tr>
@@ -85,17 +85,17 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">¿Estás seguro de que quieres desactivar esta implementador?</h5>
+				<h5 class="modal-title">Are you sure you want to deactivate this implementer?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
 				<form action="#" method="POST" id="formDeactiveImplementer">
 					@csrf
 					@method('PUT')
-					<button type="submit" class="btn btn-primary">Desactivar</button>
+					<button type="submit" class="btn btn-primary">Deactivate</button>
 				</form>
 			</div>
 		</div>
@@ -106,17 +106,17 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">¿Estás seguro de que quieres activar este implementador?</h5>
+				<h5 class="modal-title">Are you sure you want to activate this implementer?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
 				<form action="#" method="POST" id="formActiveImplementer">
 					@csrf
 					@method('PUT')
-					<button type="submit" class="btn btn-primary">Activar</button>
+					<button type="submit" class="btn btn-primary">Activate</button>
 				</form>
 			</div>
 		</div>
@@ -127,17 +127,17 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">¿Estás seguro de que quieres eliminar este implementador?</h5>
+				<h5 class="modal-title">Are you sure you want to delete this implementer?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
 				<form action="#" method="POST" id="formDeleteImplementer">
 					@csrf
 					@method('DELETE')
-					<button type="submit" class="btn btn-primary">Eliminar</button>
+					<button type="submit" class="btn btn-primary">Delete</button>
 				</form>
 			</div>
 		</div>

@@ -223,6 +223,50 @@ $(document).ready(function() {
       maxDate : "today"
     });
   }
+
+  //Mapa de leaflet
+  if ($('#lat').length && $('#lng').length && $('#map').length) {
+    var lat=$('#lat').val(), lng=$('#lng').val();
+    var map = L.map('map', {
+      center: [lat, lng],
+      zoom: 7
+    });
+
+    marker = L.marker([lat, lng]).addTo(map);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+  }
+
+  if ($('#lat').length && $('#lng').length && $('#map-implementer').length) {
+    var lat=38.81510115312363, lng=-99.755859375;
+    if ($('#lat').val()!="" && $('#lng').val()!="") {
+      lat=$('#lat').val();
+      lng=$('#lng').val();
+    }
+
+    var map = L.map('map-implementer', {
+      center: [lat, lng],
+      zoom: 5
+    });
+
+    marker = L.marker([lat, lng]).addTo(map);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    map.on('click', function(e) {
+      if (marker) {
+        map.removeLayer(marker);
+      }
+
+      marker=L.marker(e.latlng).addTo(map);
+      $('#lat').val(e.latlng.lat);
+      $('#lng').val(e.latlng.lng);
+    });
+  }
 });
 
 // funcion para cambiar el input hidden al cambiar el switch de estado
@@ -256,6 +300,16 @@ function activeAdmin(slug) {
   $('#formActiveAdmin').attr('action', '/admin/administrators/' + slug + '/activate');
 }
 
+function deactiveImplementer(slug) {
+  $("#deactiveImplementer").modal();
+  $('#formDeactiveImplementer').attr('action', '/admin/implementers/' + slug + '/deactivate');
+}
+
+function activeImplementer(slug) {
+  $("#activeImplementer").modal();
+  $('#formActiveImplementer').attr('action', '/admin/implementers/' + slug + '/activate');
+}
+
 function deactiveBanner(slug) {
   $("#deactiveBanner").modal();
   $('#formDeactiveBanner').attr('action', '/admin/banners/' + slug + '/deactivate');
@@ -270,6 +324,11 @@ function activeBanner(slug) {
 function deleteAdmin(slug) {
   $("#deleteAdmin").modal();
   $('#formDeleteAdmin').attr('action', '/admin/administrators/' + slug);
+}
+
+function deleteImplementer(slug) {
+  $("#deleteImplementer").modal();
+  $('#formDeleteImplementer').attr('action', '/admin/implementers/' + slug);
 }
 
 function deleteBanner(slug) {

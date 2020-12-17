@@ -24,57 +24,6 @@ $(document).ready(function(){
 		});
 	});
 
-	//Usuarios register
-	$("button[action='register']").on("click",function(){
-		$("#formRegister").validate({
-			rules:
-			{
-				name: {
-					required: true,
-					minlength: 2,
-					maxlength: 191
-				},
-
-				lastname: {
-					required: true,
-					minlength: 2,
-					maxlength: 191
-				},
-
-				email: {
-					required: true,
-					email: true,
-					minlength: 5,
-					maxlength: 191,
-					remote: {
-						url: "/usuarios/email",
-						type: "get"
-					}
-				},
-
-				password: {
-					required: true,
-					minlength: 8,
-					maxlength: 40
-				},
-
-				terms: {
-					required: true
-				}
-			},
-			messages:
-			{
-				email: {
-					remote: "This email is already in use."
-				}
-			},
-			submitHandler: function(form) {
-				$("button[action='register']").attr('disabled', true);
-				form.submit();
-			}
-		});
-	});
-
 	//Recuperar Contraseña
 	$("button[action='recovery']").on("click",function(){
 		$("#formRecovery").validate({
@@ -260,6 +209,161 @@ $(document).ready(function(){
 			},
 			submitHandler: function(form) {
 				$("button[action='admin']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
+
+	//Implementadores
+	$("button[action='implementer']").on("click",function(){
+		$("#formImplementer").validate({
+			rules:
+			{
+				name: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				lastname: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				title: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				phone: {
+					required: true,
+					minlength: 5,
+					maxlength: 15
+				},
+
+				address: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				experience: {
+					required: true,
+					minlength: 2,
+					maxlength: 16770000
+				},
+
+				email: {
+					required: true,
+					email: true,
+					minlength: 5,
+					maxlength: 191,
+					remote: {
+						url: "/administradores/email",
+						type: "get"
+					}
+				},
+
+				facebook: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				twitter: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				linkedin: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				}
+			},
+			messages:
+			{
+				email: {
+					remote: "This email is already in use."
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='implementer']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
+
+	$("button[action='implementer']").on("click",function(){
+		$("#formImplementerEdit").validate({
+			rules:
+			{
+				name: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				lastname: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				title: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				phone: {
+					required: true,
+					minlength: 5,
+					maxlength: 15
+				},
+
+				address: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				experience: {
+					required: true,
+					minlength: 2,
+					maxlength: 16770000
+				},
+
+				email: {
+					required: true,
+					email: true,
+					minlength: 5,
+					maxlength: 191
+				},
+
+				facebook: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				twitter: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				linkedin: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='implementer']").attr('disabled', true);
 				form.submit();
 			}
 		});

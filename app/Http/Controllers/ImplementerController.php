@@ -38,7 +38,7 @@ class ImplementerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CaretakerStoreRequest $request) {
+    public function store(ImplementerStoreRequest $request) {
         $count=User::where('name', request('name'))->where('lastname', request('lastname'))->count();
         $slug=Str::slug(request('name')." ".request('lastname'), '-');
         if ($count>0) {
@@ -53,10 +53,7 @@ class ImplementerController extends Controller
                 $slug=Str::slug(request('name')." ".request('lastname'), '-')."-".$num;
                 $num++;
             } else {
-                $locality=Locality::where('id', request('locality_id'))->firstOrFail();
-                $education=Education::where('slug', request('education_id'))->firstOrFail();
-                $available=Available::where('slug', request('available_id'))->firstOrFail();
-                $data=array('name' => request('name'), 'lastname' => request('lastname'), 'slug' => $slug, 'birthday' => date('Y-m-d', strtotime(request('birthday'))), 'email' => request('email'), 'password' => Hash::make(request('password')), 'locality_id' => $locality->id, 'education_id' => $education->id, 'available_id' => $available->id);
+                $data=array('name' => request('name'), 'lastname' => request('lastname'), 'phone' => request('phone'), 'slug' => $slug, 'email' => request('email'), 'type' => '2');
                 break;
             }
         }
@@ -67,20 +64,15 @@ class ImplementerController extends Controller
             $data['photo']=store_files($file, $slug, '/admins/img/users/');
         }
 
-        $people=User::create($data);
-        $implementer=Caretaker::create(['people_id' => $people->id]);
+        $user=User::create($data);
 
-        foreach (request('task_id') as $task_slug) {
-            $task=Task::where('slug', $task_slug)->first();
-            if (!is_null($task)) {
-                CaretakerTask::create(['caretaker_id' => $implementer->id, 'task_id' => $task->id]);
-            }
-        }
+        $data=array('title' => request('title'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'), 'user_id' => $user->id);
+        $implementer=Implementer::create($data);
 
-        if ($implementer) {
-            return redirect()->route('implementadores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Registro exitoso', 'msg' => 'El implementador ha sido registrado exitosamente.']);
+        if ($user && $implementer) {
+            return redirect()->route('implementadores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Save successful', 'msg' => 'The implementer has been successfully registered.']);
         } else {
-            return redirect()->route('implementadores.create')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Registro fallido', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.'])->withInputs();
+            return redirect()->route('implementadores.create')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Save failed', 'msg' => 'An error occurred durind the process, please try again.'])->withInputs();
         }
     }
 
@@ -91,8 +83,8 @@ class ImplementerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($slug) {
-        $people=People::where('slug', $slug)->firstOrFail();
-        return view('admin.implementers.show', compact('people'));
+        $user=User::where('slug', $slug)->firstOrFail();
+        return view('admin.implementers.show', compact('user'));
     }
 
     /**
@@ -102,8 +94,8 @@ class ImplementerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($slug) {
-        $people=People::where('slug', $slug)->firstOrFail();
-        return view('admin.implementers.edit', compact("people"));
+        $user=User::where('slug', $slug)->firstOrFail();
+        return view('admin.implementers.edit', compact("user"));
     }
 
     /**
@@ -114,8 +106,8 @@ class ImplementerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(ImplementerUpdateRequest $request, $slug) {
-        $people=User::where('slug', $slug)->firstOrFail();
-        $data=array('name' => request('name'), 'lastname' => request('lastname'), 'birthday' => date('Y-m-d', strtotime(request('birthday'))), 'locality_id' => $locality->id, 'education_id' => $education->id, 'available_id' => $available->id);
+        $user=User::where('slug', $slug)->firstOrFail();
+        $data=array('name' => request('name'), 'lastname' => request('lastname'), 'phone' => request('phone'), 'email' => request('email'));
 
         // Mover imagen a carpeta users y extraer nombre
         if ($request->hasFile('photo')) {
@@ -123,20 +115,15 @@ class ImplementerController extends Controller
             $data['photo']=store_files($file, $slug, '/admins/img/users/');
         }
 
-        $people->fill($data)->save();
+        $user->fill($data)->save();
 
-        CaretakerTask::where('caretaker_id', $people->caretaker->id)->delete();
-        foreach (request('task_id') as $task_slug) {
-            $task=Task::where('slug', $task_slug)->first();
-            if (!is_null($task)) {
-                CaretakerTask::create(['caretaker_id' => $people->caretaker->id, 'task_id' => $task->id]);
-            }
-        }
+        $data=array('title' => request('title'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'));
+        $user->implementer->fill($data)->save();
 
-        if ($people) {
-            return redirect()->route('implementadores.edit', ['slug' => $slug])->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El implementador ha sido editado exitosamente.']);
+        if ($user) {
+            return redirect()->route('implementadores.edit', ['slug' => $slug])->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The implementer has been edited successfully.']);
         } else {
-            return redirect()->route('implementadores.edit', ['slug' => $slug])->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.'])->withInputs();
+            return redirect()->route('implementadores.edit', ['slug' => $slug])->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 
@@ -148,36 +135,35 @@ class ImplementerController extends Controller
      */
     public function destroy($slug)
     {
-        $implementer=User::where('slug', $slug)->firstOrFail();
-        $implementer->delete();
+        $user=User::where('slug', $slug)->firstOrFail();
+        $user->delete();
 
-        if ($implementer) {
-            return redirect()->route('implementadores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Eliminación exitosa', 'msg' => 'El implementador ha sido eliminado exitosamente.']);
+        if ($user) {
+            return redirect()->route('implementadores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful removal', 'msg' => 'The implementer has been successfully removed.']);
         } else {
-            return redirect()->route('implementadores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Eliminación fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('implementadores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed deletion', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 
     public function deactivate(Request $request, $slug) {
+        $user=User::where('slug', $slug)->firstOrFail();
+        $user->fill(['state' => "0"])->save();
 
-        $implementer=User::where('slug', $slug)->firstOrFail();
-        $implementer->fill(['state' => "0"])->save();
-
-        if ($implementer) {
-            return redirect()->route('implementadores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El implementador ha sido desactivado exitosamente.']);
+        if ($user) {
+            return redirect()->route('implementadores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The implementer has been successfully deactivated.']);
         } else {
-            return redirect()->route('implementadores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('implementadores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 
     public function activate(Request $request, $slug) {
-        $implementer=User::where('slug', $slug)->firstOrFail();
-        $implementer->fill(['state' => "1"])->save();
+        $user=User::where('slug', $slug)->firstOrFail();
+        $user->fill(['state' => "1"])->save();
 
-        if ($implementer) {
-            return redirect()->route('implementadores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El implementador ha sido activado exitosamente.']);
+        if ($user) {
+            return redirect()->route('implementadores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The implementer has been activated successfully.']);
         } else {
-            return redirect()->route('implementadores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('implementadores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 }
