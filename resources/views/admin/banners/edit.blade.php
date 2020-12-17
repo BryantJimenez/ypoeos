@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Editar Banner')
+@section('title', 'Edit Banner')
 
 @section('links')
 <link rel="stylesheet" type="text/css" href="{{ asset('/admins/css/forms/switches.css') }}">
@@ -21,7 +21,7 @@
 			<div class="widget-header">
 				<div class="row">
 					<div class="col-xl-12 col-md-12 col-sm-12 col-12">
-						<h4>Editar Banner</h4>
+						<h4>Edit Banner</h4>
 					</div>                 
 				</div>
 			</div>
@@ -32,28 +32,28 @@
 
 						@include('admin.partials.errors')
 
-						<p>Campos obligatorios (<b class="text-danger">*</b>)</p>
+						<p>Required fields (<b class="text-danger">*</b>)</p>
 						<form action="{{ route('banners.update', ['slug' => $banner->slug]) }}" method="POST" class="form" id="formBannerEdit" enctype="multipart/form-data">
 							@csrf
 							@method('PUT')
 							<div class="row">
 								<div class="form-group col-12">
-									<label class="col-form-label">Título (Opcional)</label>
-									<input class="form-control @error('title') is-invalid @enderror" type="text" name="title" placeholder="Introduzca un título" value="{{ $banner->title }}">
+									<label class="col-form-label">Title (Optional)</label>
+									<input class="form-control @error('title') is-invalid @enderror" type="text" name="title" placeholder="Enter a title" value="{{ $banner->title }}">
 								</div>
 
 								<div class="form-group col-12">
-									<label class="col-form-label">Texto (Opcional)</label>
-									<input class="form-control @error('text') is-invalid @enderror" type="text" name="text" placeholder="Introduzca un texto" value="{{ $banner->text }}">
+									<label class="col-form-label">Text (Optional)</label>
+									<input class="form-control @error('text') is-invalid @enderror" type="text" name="text" placeholder="Enter a text" value="{{ $banner->text }}">
 								</div>
 
 								<div class="form-group col-12">
-									<label class="col-form-label">Imagen<b class="text-danger">*</b></label>
-									<input type="file" name="image" accept="image/*" id="input-file-now" class="dropify" data-height="125" data-max-file-size="20M" data-allowed-file-extensions="jpg png jpeg web3" data-default-file="{{ image_exist('/admins/img/banners/', $banner->image) }}" />
+									<label class="col-form-label">Image<b class="text-danger">*</b></label>
+									<input type="file" name="image" accept="image/*" class="dropify" data-height="125" data-max-file-size="20M" data-allowed-file-extensions="jpg png jpeg web3" data-default-file="{{ image_exist('/admins/img/banners/', $banner->image) }}" />
 								</div>
 
 								<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
-									<label class="col-form-label">Desactivar/Activar Botón<b class="text-danger">*</b></label>
+									<label class="col-form-label">Deactivate/Activate Button<b class="text-danger">*</b></label>
 									<div>
 										<label class="switch s-icons s-outline s-outline-primary mr-2">
 											<input type="checkbox" @if($banner->button==1) checked @endif required value="1" id="buttonCheckbox">
@@ -64,7 +64,7 @@
 								</div>
 
 								<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
-									<label class="col-form-label">Desactivar/Activar Banner<b class="text-danger">*</b></label>
+									<label class="col-form-label">Deactivate/Activate Banner<b class="text-danger">*</b></label>
 									<div>
 										<label class="switch s-icons s-outline s-outline-primary mr-2">
 											<input type="checkbox" @if($banner->state==1) checked @endif required value="1" id="stateCheckbox">
@@ -77,12 +77,12 @@
 								<div class="col-12 @if($banner->button==0) d-none @endif" id="buttonInputs">
 									<div class="row">
 										<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
-											<label class="col-form-label">Texto de Botón (Opcional)</label>
-											<input class="form-control @error('button_text') is-invalid @enderror" type="text" name="button_text" placeholder="Introduzca el texto del botón" value="{{ $banner->button_text }}">
+											<label class="col-form-label">Button Text (Optional)</label>
+											<input class="form-control @error('button_text') is-invalid @enderror" type="text" name="button_text" placeholder="Enter the button text" value="{{ $banner->button_text }}">
 										</div>
 
 										<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
-											<label class="col-form-label">¿Desea añadir una url destino? (Opcional)</label>
+											<label class="col-form-label">You want to add a destination url? (Optional)</label>
 											<div class="input-group">
 												<div class="input-group-prepend">
 													<select class="form-control @error('pre_url') is-invalid @enderror" name="pre_url">
@@ -90,22 +90,22 @@
 														<option @if($banner->pre_url=="https://") selected @endif>https://</option>
 													</select>
 												</div>
-												<input class="form-control @error('url') is-invalid @enderror" type="text" name="url" placeholder="www.ejemplo.com/pagina" value="{{ $banner->url }}">
+												<input class="form-control @error('url') is-invalid @enderror" type="text" name="url" placeholder="www.example.com/page" value="{{ $banner->url }}">
 											</div>
 										</div>
 
 										<div class="form-group col-xl-6 col-lg-6 col-md-6 col-12">
-											<label class="col-form-label">¿Dónde quieres que se vea la url? (Opcional)</label>
+											<label class="col-form-label">Where do you want the url to be seen? (Optional)</label>
 											<div class="n-chk">
 												<label class="new-control new-radio new-radio-text radio-primary">
 													<input type="radio" class="new-control-input" name="target" @if($banner->target==2) checked @endif value="2">
-													<span class="new-control-indicator"></span><span class="new-radio-content">Nueva Pestaña</span>
+													<span class="new-control-indicator"></span><span class="new-radio-content">New Tab</span>
 												</label>
 											</div>
 											<div class="n-chk">
 												<label class="new-control new-radio new-radio-text radio-primary">
 													<input type="radio" class="new-control-input" name="target" @if($banner->target==1) checked @endif value="1">
-													<span class="new-control-indicator"></span><span class="new-radio-content">En la misma Pestaña</span>
+													<span class="new-control-indicator"></span><span class="new-radio-content">Same Tab</span>
 												</label>
 											</div>
 										</div>
@@ -114,8 +114,8 @@
 
 								<div class="form-group col-12">
 									<div class="btn-group" role="group">
-										<button type="submit" class="btn btn-primary" action="banner">Actualizar</button>
-										<a href="{{ route('banners.index') }}" class="btn btn-secondary">Volver</a>
+										<button type="submit" class="btn btn-primary" action="banner">Update</button>
+										<a href="{{ route('banners.index') }}" class="btn btn-secondary">Cancel</a>
 									</div>
 								</div> 
 							</div>

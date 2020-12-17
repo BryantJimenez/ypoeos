@@ -29,7 +29,7 @@ class AdminController extends Controller
 
     public function profileUpdate(ProfileUpdateRequest $request) {
         $user = User::where('slug', Auth::user()->slug)->firstOrFail();
-        $data=array('name' => request('name'), 'lastname' => request('lastname'), 'phone' => request('phone'), 'type' => request('type'));
+        $data=array('name' => request('name'), 'lastname' => request('lastname'), 'phone' => request('phone'));
 
         if (!is_null(request('password'))) {
             $data['password']=Hash::make(request('password'));
@@ -50,13 +50,12 @@ class AdminController extends Controller
             Auth::user()->name=request('name');
             Auth::user()->lastname=request('lastname');
             Auth::user()->phone=request('phone');
-            Auth::user()->type=request('type');
             if (!is_null(request('password'))) {
                 Auth::user()->password=Hash::make(request('password'));
             }
-            return redirect()->back()->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El perfil ha sido editado exitosamente.']);
+            return redirect()->back()->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The profile has been edited successfully.']);
         } else {
-            return redirect()->back()->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.'])->withInputs();
+            return redirect()->back()->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.'])->withInputs();
         }
     }
 

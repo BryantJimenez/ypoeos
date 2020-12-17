@@ -75,9 +75,9 @@ class BannerController extends Controller
         $banner=Banner::create($data);
 
         if ($banner) {
-            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Registro exitoso', 'msg' => 'El banner ha sido registrado exitosamente.']);
+            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Save successful', 'msg' => 'The banner has been successfully registered.']);
         } else {
-            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Registro fallido', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Save failed', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
     
@@ -127,9 +127,9 @@ class BannerController extends Controller
         $banner->fill($data)->save();
 
         if ($banner) {
-            return redirect()->route('banners.edit', ['slug' => $slug])->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El banner ha sido editado exitosamente.']);
+            return redirect()->route('banners.edit', ['slug' => $slug])->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The banner has been edited successfully.']);
         } else {
-            return redirect()->route('banners.edit', ['slug' => $slug])->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('banners.edit', ['slug' => $slug])->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 
@@ -139,9 +139,9 @@ class BannerController extends Controller
         $banner->delete();
 
         if ($banner) {
-            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Eliminación exitosa', 'msg' => 'El banner ha sido eliminado exitosamente.']);
+            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful removal', 'msg' => 'The banner has been successfully removed.']);
         } else {
-            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Eliminación fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed deletion', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 
@@ -151,9 +151,9 @@ class BannerController extends Controller
         $banner->fill(['state' => "0"])->save();
 
         if ($banner) {
-            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El banner ha sido desactivado exitosamente.']);
+            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The banner has been successfully deactivated.']);
         } else {
-            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 
@@ -162,9 +162,9 @@ class BannerController extends Controller
         $banner->fill(['state' => "1"])->save();
 
         if ($banner) {
-            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El banner ha sido activado exitosamente.']);
+            return redirect()->route('banners.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The banner has been activated successfully.']);
         } else {
-            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('banners.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 }

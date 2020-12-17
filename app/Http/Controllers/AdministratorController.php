@@ -66,9 +66,9 @@ class AdministratorController extends Controller
         $admin=User::create($data);
 
         if ($admin) {
-            return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Registro exitoso', 'msg' => 'El administrador ha sido registrado exitosamente.']);
+            return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Save successful', 'msg' => 'The administrator has been successfully registered.']);
         } else {
-            return redirect()->route('administradores.create')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Registro fallido', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.'])->withInputs();
+            return redirect()->route('administradores.create')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Save failed', 'msg' => 'An error occurred durind the process, please try again.'])->withInputs();
         }
     }
 
@@ -115,9 +115,9 @@ class AdministratorController extends Controller
         $admin->fill($data)->save();
 
         if ($admin) {
-            return redirect()->route('administradores.edit', ['slug' => $slug])->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El administrador ha sido editado exitosamente.']);
+            return redirect()->route('administradores.edit', ['slug' => $slug])->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The administrator has been edited successfully.']);
         } else {
-            return redirect()->route('administradores.edit', ['slug' => $slug])->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.'])->withInputs();
+            return redirect()->route('administradores.edit', ['slug' => $slug])->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.'])->withInputs();
         }
     }
 
@@ -133,9 +133,9 @@ class AdministratorController extends Controller
         $user->delete();
 
         if ($user) {
-            return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Eliminación exitosa', 'msg' => 'El administrador ha sido eliminado exitosamente.']);
+            return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful removal', 'msg' => 'The administrator has been successfully removed.']);
         } else {
-            return redirect()->route('administradores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Eliminación fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('administradores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed deletion', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 
@@ -145,9 +145,9 @@ class AdministratorController extends Controller
         $admin->fill(['state' => "0"])->save();
 
         if ($admin) {
-            return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El administrador ha sido desactivado exitosamente.']);
+            return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The administrator has been successfully deactivated.']);
         } else {
-            return redirect()->route('administradores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('administradores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 
@@ -157,9 +157,9 @@ class AdministratorController extends Controller
         $admin->fill(['state' => "1"])->save();
 
         if ($admin) {
-            return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El administrador ha sido activado exitosamente.']);
+            return redirect()->route('administradores.index')->with(['alert' => 'sweet', 'type' => 'success', 'title' => 'Successful edit', 'msg' => 'The administrator has been activated successfully.']);
         } else {
-            return redirect()->route('administradores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            return redirect()->route('administradores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
     }
 }

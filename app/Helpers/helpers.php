@@ -2,11 +2,11 @@
 
 function state($state) {
 	if ($state==0) {
-		return '<span class="badge badge-danger">Inactivo</span>';
+		return '<span class="badge badge-danger">Inactive</span>';
 	} elseif ($state==1) {
-		return '<span class="badge badge-success">Activo</span>';
+		return '<span class="badge badge-success">Active</span>';
 	} else {
-		return '<span class="badge badge-dark">Desconocido</span>';
+		return '<span class="badge badge-dark">Unknown</span>';
 	}
 }
 
@@ -15,13 +15,13 @@ function typeUser($type, $badge=1) {
 		if ($type==1) {
 			return '<span class="badge badge-primary">Super Admin</span>';
 		} else {
-			return '<span class="badge badge-dark">Desconocido</span>';
+			return '<span class="badge badge-dark">Unknown</span>';
 		}
 	} elseif ($badge==0) {
 		if ($type==1) {
 			return 'Super Admin';
 		} else {
-			return 'Desconocido';
+			return 'Unknown';
 		}
 	}
 }

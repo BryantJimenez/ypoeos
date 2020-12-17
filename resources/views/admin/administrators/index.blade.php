@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Lista de Administradores')
+@section('title', 'Administrators List')
 
 @section('links')
 <link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/table/datatable/datatables.css') }}">
@@ -21,7 +21,7 @@
 			<div class="widget-header">
 				<div class="row">
 					<div class="col-xl-12 col-md-12 col-sm-12 col-12">
-						<h4>Lista de Administradores</h4>
+						<h4>Administrators List</h4>
 					</div>                 
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="text-right">
-							<a href="{{ route('administradores.create') }}" class="btn btn-primary">Agregar</a>
+							<a href="{{ route('administradores.create') }}" class="btn btn-primary">New</a>
 						</div>
 
 						<div class="table-responsive mb-4 mt-4">
@@ -38,12 +38,12 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>Nombre Completo</th>
-										<th>Correo</th>
-										<th>Teléfono</th>
-										<th>Tipo</th>
-										<th>Estado</th>
-										<th>Acciones</th>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Phone</th>
+										<th>Type</th>
+										<th>State</th>
+										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -59,14 +59,14 @@
 										<td>{!! state($admin->state) !!}</td>
 										<td>
 											<div class="btn-group" role="group">
-												<a href="{{ route('administradores.show', ['slug' => $admin->slug]) }}" class="btn btn-primary btn-sm bs-tooltip" title="Perfil"><i class="fa fa-user"></i></a>
-												<a href="{{ route('administradores.edit', ['slug' => $admin->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+												<a href="{{ route('administradores.show', ['slug' => $admin->slug]) }}" class="btn btn-primary btn-sm bs-tooltip" title="Profile"><i class="fa fa-user"></i></a>
+												<a href="{{ route('administradores.edit', ['slug' => $admin->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Edit"><i class="fa fa-edit"></i></a>
 												@if($admin->state==1)
-												<button type="button" class="btn btn-warning btn-sm bs-tooltip" title="Desactivar" onclick="deactiveAdmin('{{ $admin->slug }}')"><i class="fa fa-power-off"></i></button>
+												<button type="button" class="btn btn-warning btn-sm bs-tooltip" title="Deactivate" onclick="deactiveAdmin('{{ $admin->slug }}')"><i class="fa fa-power-off"></i></button>
 												@else
-												<button type="button" class="btn btn-success btn-sm bs-tooltip" title="Activar" onclick="activeAdmin('{{ $admin->slug }}')"><i class="fa fa-check"></i></button>
+												<button type="button" class="btn btn-success btn-sm bs-tooltip" title="Activate" onclick="activeAdmin('{{ $admin->slug }}')"><i class="fa fa-check"></i></button>
 												@endif
-												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Eliminar" onclick="deleteAdmin('{{ $admin->slug }}')"><i class="fa fa-trash"></i></button>
+												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Delete" onclick="deleteAdmin('{{ $admin->slug }}')"><i class="fa fa-trash"></i></button>
 											</div>
 										</td>
 									</tr>
@@ -87,17 +87,17 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">¿Estás seguro de que quieres desactivar este administrador?</h5>
+				<h5 class="modal-title">Are you sure you want to deactivate this administrator?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
 				<form action="#" method="POST" id="formDeactiveAdmin">
 					@csrf
 					@method('PUT')
-					<button type="submit" class="btn btn-primary">Desactivar</button>
+					<button type="submit" class="btn btn-primary">Deactivate</button>
 				</form>
 			</div>
 		</div>
@@ -108,17 +108,17 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">¿Estás seguro de que quieres activar este administrador?</h5>
+				<h5 class="modal-title">Are you sure you want to activate this administrator?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
 				<form action="#" method="POST" id="formActiveAdmin">
 					@csrf
 					@method('PUT')
-					<button type="submit" class="btn btn-primary">Activar</button>
+					<button type="submit" class="btn btn-primary">Activate</button>
 				</form>
 			</div>
 		</div>
@@ -129,17 +129,17 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">¿Estás seguro de que quieres eliminar este administrador?</h5>
+				<h5 class="modal-title">Are you sure you want to delete this administrator?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
 				<form action="#" method="POST" id="formDeleteAdmin">
 					@csrf
 					@method('DELETE')
-					<button type="submit" class="btn btn-primary">Eliminar</button>
+					<button type="submit" class="btn btn-primary">Delete</button>
 				</form>
 			</div>
 		</div>

@@ -30,8 +30,7 @@ class ProfileUpdateRequest extends FormRequest
         'photo' => 'nullable|file|mimetypes:image/*',
         'name' => 'required|string|min:2|max:191',
         'lastname' => 'required|string|min:2|max:191',
-        'phone' => 'required|string|min:5|max:15',
-        'type' => 'required|'.Rule::in(['1'])  
+        'phone' => 'required|string|min:5|max:15'
       ];
     } else {
       return [
@@ -39,7 +38,6 @@ class ProfileUpdateRequest extends FormRequest
         'name' => 'required|string|min:2|max:191',
         'lastname' => 'required|string|min:2|max:191',
         'phone' => 'required|string|min:5|max:15',
-        'type' => 'required|'.Rule::in(['1']),
         'password' => 'required|string|min:8|confirmed'
       ];
     }

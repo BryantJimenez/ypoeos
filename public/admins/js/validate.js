@@ -17,19 +17,6 @@ $(document).ready(function(){
 					maxlength: 40
 				}
 			},
-			messages:
-			{
-				email: {
-					email: 'Introduce una dirección de correo valida.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				password: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				}
-			},
 			submitHandler: function(form) {
 				$("button[action='login']").attr('disabled', true);
 				form.submit();
@@ -77,26 +64,8 @@ $(document).ready(function(){
 			},
 			messages:
 			{
-				name: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				lastname: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
 				email: {
-					email: 'Introduce una dirección de correo valida.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.',
-					remote: "Este correo ya esta en uso."
-				},
-
-				password: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					remote: "This email is already in use."
 				}
 			},
 			submitHandler: function(form) {
@@ -123,20 +92,6 @@ $(document).ready(function(){
 					email: true,
 					minlength: 5,
 					maxlength: 191
-				}
-			},
-			messages:
-			{
-				email: {
-					email: 'Introduce una dirección de correo valida.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				recovery: {
-					email: 'Introduce una dirección de correo valida.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
 				}
 			},
 			submitHandler: function(form) {
@@ -172,21 +127,8 @@ $(document).ready(function(){
 			},
 			messages:
 			{
-				email: {
-					email: 'Introduce una dirección de correo valida.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				password: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
 				password_confirmation: { 
-					equalTo: 'Los datos ingresados no coinciden.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					equalTo: 'The data entered does not match.'
 				}
 			},
 			submitHandler: function(form) {
@@ -237,34 +179,12 @@ $(document).ready(function(){
 			},
 			messages:
 			{
-				name: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				lastname: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				phone: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
 				type: {
-					required: 'Seleccione una opción.'
-				},
-
-				password: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					required: 'Select an option.'
 				},
 
 				password_confirmation: { 
-					equalTo: 'Los datos ingresados no coinciden.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					equalTo: 'The data entered does not match.'
 				}
 			},
 			submitHandler: function(form) {
@@ -326,41 +246,16 @@ $(document).ready(function(){
 			},
 			messages:
 			{
-				name: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				lastname: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
 				email: {
-					email: 'Introduce una dirección de correo valida.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.',
-					remote: "Este correo ya esta en uso."
-				},
-
-				phone: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					remote: "This email is already in use."
 				},
 
 				type: {
-					required: 'Seleccione una opción.'
-				},
-
-				password: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					required: 'Select an option.'
 				},
 
 				password_confirmation: { 
-					equalTo: 'Los datos ingresados no coinciden.',
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					equalTo: 'The data entered does not match.'
 				}
 			},
 			submitHandler: function(form) {
@@ -417,40 +312,20 @@ $(document).ready(function(){
 			},
 			messages:
 			{
-				title: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				text: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
 				button: {
-					required: 'Seleccione una opción.'
-				},
-
-				text_button: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					required: 'Select an option.'
 				},
 
 				pre_url: {
-					required: 'Seleccione una opción.'
-				},
-
-				url: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					required: 'Select an option.'
 				},
 
 				state: {
-					required: 'Seleccione una opción.'
+					required: 'Select an option.'
 				},
 
 				image: {
-					required: 'Seleccione una imagen.'
+					required: 'Select an image.'
 				}
 			},
 			submitHandler: function(form) {
@@ -503,36 +378,16 @@ $(document).ready(function(){
 			},
 			messages:
 			{
-				title: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
-				text: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
-				},
-
 				button: {
-					required: 'Seleccione una opción.'
-				},
-
-				text_button: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					required: 'Select an option.'
 				},
 
 				pre_url: {
-					required: 'Seleccione una opción.'
-				},
-
-				url: {
-					minlength: 'Escribe mínimo {0} caracteres.',
-					maxlength: 'Escribe máximo {0} caracteres.'
+					required: 'Select an option.'
 				},
 
 				state: {
-					required: 'Seleccione una opción.'
+					required: 'Select an option.'
 				}
 			},
 			submitHandler: function(form) {
