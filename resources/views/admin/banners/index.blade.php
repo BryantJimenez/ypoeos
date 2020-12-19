@@ -50,7 +50,7 @@
 									<tr>
 										<td>{{ $num++ }}</td>
 										<td class="d-flex">
-											<img src="{{ image_exist('/admins/img/banners/', $banner->image, false, false) }}" class="rounded-circle mr-2" width="45" height="45" alt="@empty($banner->title){{ $banner->title }}{{ "Banner" }}@else{{ $banner->title }}@endempty"> @empty($banner->title){{ $banner->title }}{{ "No Title" }}@else{{ $banner->title }}@endempty
+											<img src="{{ image_exist('/admins/img/banners/', $banner->image, false, false) }}" class="rounded-circle mr-2" width="45" height="45" alt="{{ $banner->title }}"> {{ $banner->title }}
 										</td>
 										<td>@empty($banner->text){{ "No Text" }}@else{{ $banner->text }}@endempty</td>
 										<td>@if($banner->button==1){{ "Yes" }}@else{{ "No" }}@endif</td>

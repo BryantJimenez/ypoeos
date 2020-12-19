@@ -22,5 +22,9 @@ class UsersTableSeeder extends Seeder
         	'state' => "1",
             'type' => 1
         ]);
+
+        factory(App\User::class, 100)->create();
+
+        factory(App\Implementer::class, 100)->create();
     }
 }

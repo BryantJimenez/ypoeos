@@ -21,7 +21,9 @@
 	{{-- <link rel="icon" href="{{ asset('/auth/images/icons/favicon.ico') }}" type="image/x-icon" /> --}}
 
 	<!-- Font Awesome -->
-	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('/web/css/fontawesome/all.min.css') }}">
 	<!-- Bootstrap core CSS -->
 	<link href="{{ asset('/web/css/bootstrap.css') }}" rel="stylesheet">
@@ -39,13 +41,6 @@
 	@yield('content')
 
 	@include('web.partials.footer')
-
-	@if(!session()->has('user'))
-	@include('web.partials.login')
-	@include('web.partials.register')
-	@include('web.partials.recovery')
-	@include('web.partials.terms')
-	@endif
 	
 	@include('web.partials.loader')
 
@@ -65,20 +60,5 @@
 	<script src="{{ asset('/admins/js/validate.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/web/js/script.js') }}"></script>
 	@include('admin.partials.notifications')
-	@if(!session()->has('user'))
-	@if(!is_null(old('name')) && !is_null(old('lastname')) && !is_null(old('email')) || session('error.register'))
-	<script type="text/javascript">
-		$('#modal-register').modal('show');
-	</script>
-	@elseif(!is_null(old('email')) || session('error.login'))
-	<script type="text/javascript">
-		$('#modal-login').modal('show');
-	</script>
-	@elseif(!is_null(old('recovery')) || session('error.recovery') || session('success.recovery'))
-	<script type="text/javascript">
-		$('#modal-recovery').modal('show');
-	</script>
-	@endif
-	@endif
 </body>
 </html>

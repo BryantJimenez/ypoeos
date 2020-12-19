@@ -12,7 +12,7 @@ class BannersTableSeeder extends Seeder
     public function run()
     {
         $banner = [
-    		['id' => 1, 'image' => 'imagen.jpg', 'title' => 'Colección de Invierno', 'slug' => 'banner', 'text' => 'Lo mejor en ropa para este 2020', 'button' => "1", 'button_text' => 'Comprar Ahora', 'pre_url' => NULL, 'url' => NULL, 'target' => '0', 'type' => '1', 'state' => '1']
+    		['id' => 1, 'image' => 'banner.jpg', 'title' => 'You Deserve to Get What You Want From Your Business', 'slug' => 'banner', 'text' => NULL, 'button' => "1", 'button_text' => 'Find An Implementer', 'pre_url' => 'http://', 'url' => 'ypoeos.otterscompany.com/implementers', 'target' => '0', 'type' => '1', 'state' => '1']
     	];
     	DB::table('banners')->insert($banner);
     }

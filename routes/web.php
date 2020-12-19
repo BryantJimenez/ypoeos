@@ -20,6 +20,8 @@ Route::get('/administradores/email', 'AdminController@emailVerifyAdmin');
 
 /////////////////////////////////////////////// WEB ////////////////////////////////////////////////
 Route::get('/', 'WebController@index')->name('home');
+Route::get('/implementers', 'WebController@implementers')->name('implementers');
+Route::get('/implementers/{slug}', 'WebController@implementer')->name('implementer');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
 	/////////////////////////////////////// ADMIN ///////////////////////////////////////////////////

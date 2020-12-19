@@ -26,7 +26,7 @@ class BannerUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'nullable|string|min:2|max:191',
+            'title' => 'required|string|min:2|max:191',
             'text' => 'nullable|string|min:2|max:450',
             'image' => 'nullable|file|mimetypes:image/*',
             'button' => 'required|'.Rule::in([0, 1]),

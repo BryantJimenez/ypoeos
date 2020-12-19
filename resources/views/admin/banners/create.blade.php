@@ -34,8 +34,8 @@
 							@csrf
 							<div class="row">
 								<div class="form-group col-12">
-									<label class="col-form-label">Title (Optional)</label>
-									<input class="form-control @error('title') is-invalid @enderror" type="text" name="title" placeholder="Enter a title" value="{{ old('title') }}">
+									<label class="col-form-label">Title<b class="text-danger">*</b></label>
+									<input class="form-control @error('title') is-invalid @enderror" type="text" name="title" required placeholder="Enter a title" value="{{ old('title') }}">
 								</div>
 
 								<div class="form-group col-12">

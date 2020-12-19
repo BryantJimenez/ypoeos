@@ -26,7 +26,7 @@
 								<div class="card bg-secondary">
 									<div class="card-body">
 										<h5 class="card-text text-white text-center font-weight-bold">Administrators</h5>
-										<h2 class="text-white text-center font-weight-bold">0</h2>
+										<h2 class="text-white text-center font-weight-bold">{{ $administrators }}</h2>
 									</div>
 								</div>
 							</div>
@@ -35,7 +35,7 @@
 								<div class="card bg-dark">
 									<div class="card-body">
 										<h5 class="card-text text-white text-center font-weight-bold">Implementers</h5>
-										<h2 class="text-white text-center font-weight-bold">0</h2>
+										<h2 class="text-white text-center font-weight-bold">{{ $implementers }}</h2>
 									</div>
 								</div>
 							</div>
