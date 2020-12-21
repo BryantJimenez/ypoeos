@@ -9,7 +9,7 @@ class Implementer extends Model
 {
 	use SoftDeletes;
 
-    protected $fillable = ['title', 'address', 'lat', 'lng', 'experience', 'facebook', 'twitter', 'linkedin', 'user_id'];
+    protected $fillable = ['title', 'address', 'lat', 'lng', 'experience', 'ypo_url', 'facebook', 'twitter', 'linkedin', 'user_id'];
 
     public function user() {
         return $this->belongsTo(User::class);

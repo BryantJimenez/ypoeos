@@ -45,12 +45,12 @@
 									<div class="row">
 										<div class="form-group col-lg-12 col-md-12 col-12">
 											<label class="col-form-label">Name<b class="text-danger">*</b></label>
-											<input class="form-control @error('name') is-invalid @enderror" type="text" name="name" required placeholder="Introduzca un nombre" value="{{ $user->name }}">
+											<input class="form-control @error('name') is-invalid @enderror" type="text" name="name" required placeholder="Enter a name" value="{{ $user->name }}">
 										</div>
 
 										<div class="form-group col-lg-12 col-md-12 col-12">
 											<label class="col-form-label">Lastname<b class="text-danger">*</b></label>
-											<input class="form-control @error('lastname') is-invalid @enderror" type="text" name="lastname" required placeholder="Introduzca un apellido" value="{{ $user->lastname }}">
+											<input class="form-control @error('lastname') is-invalid @enderror" type="text" name="lastname" required placeholder="Enter a lastname" value="{{ $user->lastname }}">
 										</div>
 									</div> 
 								</div>
@@ -79,7 +79,7 @@
 
 								<div class="form-group col-12">
 									<label class="col-form-label">Experience<b class="text-danger">*</b></label>
-									<textarea class="form-control @error('experience') is-invalid @enderror" name="experience" placeholder="Enter a experience" rows="5">{{ $user->implementer->experience }}</textarea>
+									<textarea class="form-control @error('experience') is-invalid @enderror" name="experience" placeholder="Enter a experience" rows="5" id="experience">{{ $user->implementer->experience }}</textarea>
 								</div>
 
 								<div class="form-group col-lg-6 col-md-6 col-12">
@@ -124,6 +124,7 @@
 @section('scripts')
 <script src="{{ asset('/admins/vendor/dropify/dropify.min.js') }}"></script>
 <script src="{{ asset('/admins/vendor/leaflet/leaflet.js') }}"></script>
+<script src="{{ asset('/admins/vendor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/jquery.validate.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/additional-methods.js') }}"></script>
 <script src="{{ asset('/admins/js/validate.js') }}"></script>

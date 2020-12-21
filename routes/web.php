@@ -17,11 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 Route::get('/administradores/email', 'AdminController@emailVerifyAdmin');
+Route::post('/implementers/add/{offset?}/{limit?}', 'ImplementerController@addImplementers');
+Route::post('/implementers/search', 'ImplementerController@search');
 
 /////////////////////////////////////////////// WEB ////////////////////////////////////////////////
 Route::get('/', 'WebController@index')->name('home');
 Route::get('/implementers', 'WebController@implementers')->name('implementers');
 Route::get('/implementers/{slug}', 'WebController@implementer')->name('implementer');
+Route::post('/implementers/{slug}/message', 'WebController@sendMessage')->name('implementer.message');
+Route::post('/implementers/{slug}/call', 'WebController@requestCall')->name('implementer.call');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
 	/////////////////////////////////////// ADMIN ///////////////////////////////////////////////////
@@ -64,4 +68,18 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::delete('/admin/banners/{slug}', 'BannerController@destroy')->name('banners.delete');
 	Route::put('/admin/banners/{slug}/activate', 'BannerController@activate')->name('banners.activate');
 	Route::put('/admin/banners/{slug}/deactivate', 'BannerController@deactivate')->name('banners.deactivate');
+
+	// Testimonios
+	Route::get('/admin/testimonials', 'TestimonialController@index')->name('testimonios.index');
+	Route::get('/admin/testimonials/create', 'TestimonialController@create')->name('testimonios.create');
+	Route::post('/admin/testimonials', 'TestimonialController@store')->name('testimonios.store');
+	Route::get('/admin/testimonials/{slug}/edit', 'TestimonialController@edit')->name('testimonios.edit');
+	Route::put('/admin/testimonials/{slug}', 'TestimonialController@update')->name('testimonios.update');
+	Route::delete('/admin/testimonials/{slug}', 'TestimonialController@destroy')->name('testimonios.delete');
+	Route::put('/admin/testimonials/{slug}/activate', 'TestimonialController@activate')->name('testimonios.activate');
+	Route::put('/admin/testimonials/{slug}/deactivate', 'TestimonialController@deactivate')->name('testimonios.deactivate');
+
+	// Ajustes
+	Route::get('/admin/settings', 'SettingController@edit')->name('ajustes.edit');
+	Route::put('/admin/settings', 'SettingController@update')->name('ajustes.update');
 });

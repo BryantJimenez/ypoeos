@@ -75,7 +75,7 @@
 
 								<div class="form-group col-12">
 									<label class="col-form-label">Experience<b class="text-danger">*</b></label>
-									<textarea class="form-control @error('experience') is-invalid @enderror" name="experience" placeholder="Enter a experience" rows="5">{{ old('experience') }}</textarea>
+									<textarea class="form-control @error('experience') is-invalid @enderror" name="experience" placeholder="Enter a experience" rows="5" id="experience">{{ old('experience') }}</textarea>
 								</div>
 
 								<div class="form-group col-lg-6 col-md-6 col-12">
@@ -120,6 +120,7 @@
 @section('scripts')
 <script src="{{ asset('/admins/vendor/dropify/dropify.min.js') }}"></script>
 <script src="{{ asset('/admins/vendor/leaflet/leaflet.js') }}"></script>
+<script src="{{ asset('/admins/vendor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/jquery.validate.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/additional-methods.js') }}"></script>
 <script src="{{ asset('/admins/js/validate.js') }}"></script>

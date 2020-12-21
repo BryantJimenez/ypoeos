@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Implementers List')
+@section('title', 'Testimonials List')
 
 @section('links')
 <link rel="stylesheet" type="text/css" href="{{ asset('/admins/vendor/table/datatable/datatables.css') }}">
@@ -21,7 +21,7 @@
 			<div class="widget-header">
 				<div class="row">
 					<div class="col-xl-12 col-md-12 col-sm-12 col-12">
-						<h4>Implementers List</h4>
+						<h4>Testimonials List</h4>
 					</div>                 
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="text-right">
-							<a href="{{ route('implementadores.create') }}" class="btn btn-primary">New</a>
+							<a href="{{ route('testimonios.create') }}" class="btn btn-primary">New</a>
 						</div>
 
 						<div class="table-responsive mb-4 mt-4">
@@ -38,33 +38,30 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>Name</th>
-										<th>Email</th>
-										<th>Phone</th>
+										<th>Author</th>
+										<th>Text</th>
+										<th>Implementer</th>
 										<th>State</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($implementers as $implementer)
+									@foreach($testimonials as $testimonial)
 									<tr>
 										<td>{{ $num++ }}</td>
-										<td class="d-flex">
-											<img src="{{ image_exist('/admins/img/users/', $implementer->photo, true) }}" class="rounded-circle mr-2" width="45" height="45" alt="{{ $implementer->name." ".$implementer->lastname }}"> {{ $implementer->name." ".$implementer->lastname }}
-										</td>
-										<td>{{ $implementer->email }}</td>
-										<td>{{ $implementer->phone }}</td>
-										<td>{!! state($implementer->state) !!}</td>
+										<td>{{ $testimonial->name }}<br>{{ "(".$testimonial->title.")" }}</td>
+										<td>{{ Str::limit($testimonial->testimonial, 50) }}</td>
+										<td>{{ $testimonial->implementer->user->name." ".$testimonial->implementer->user->lastname }}</td>
+										<td>{!! state($testimonial->state) !!}</td>
 										<td>
 											<div class="btn-group" role="group">
-												<a href="{{ route('implementadores.show', ['slug' => $implementer->slug]) }}" class="btn btn-primary btn-sm bs-tooltip" title="Profile"><i class="fa fa-user"></i></a>
-												<a href="{{ route('implementadores.edit', ['slug' => $implementer->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Edit"><i class="fa fa-edit"></i></a>
-												@if($implementer->state==1)
-												<button type="button" class="btn btn-warning btn-sm bs-tooltip" title="Deactivate" onclick="deactiveImplementer('{{ $implementer->slug }}')"><i class="fa fa-power-off"></i></button>
+												<a href="{{ route('testimonios.edit', ['slug' => $testimonial->slug]) }}" class="btn btn-info btn-sm bs-tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+												@if($testimonial->state==1)
+												<button type="button" class="btn btn-warning btn-sm bs-tooltip" title="Deactivate" onclick="deactiveTestimonial('{{ $testimonial->slug }}')"><i class="fa fa-power-off"></i></button>
 												@else
-												<button type="button" class="btn btn-success btn-sm bs-tooltip" title="Activate" onclick="activeImplementer('{{ $implementer->slug }}')"><i class="fa fa-check"></i></button>
+												<button type="button" class="btn btn-success btn-sm bs-tooltip" title="Activate" onclick="activeTestimonial('{{ $testimonial->slug }}')"><i class="fa fa-check"></i></button>
 												@endif
-												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Delete" onclick="deleteImplementer('{{ $implementer->slug }}')"><i class="fa fa-trash"></i></button>
+												<button type="button" class="btn btn-danger btn-sm bs-tooltip" title="Delete" onclick="deleteTestimonial('{{ $testimonial->slug }}')"><i class="fa fa-trash"></i></button>
 											</div>
 										</td>
 									</tr>
@@ -81,18 +78,18 @@
 
 </div>
 
-<div class="modal fade" id="deactiveImplementer" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="deactiveTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Are you sure you want to deactivate this implementer?</h5>
+				<h5 class="modal-title">Are you sure you want to deactivate this testimonial?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
-				<form action="#" method="POST" id="formDeactiveImplementer">
+				<form action="#" method="POST" id="formDeactiveTestimonial">
 					@csrf
 					@method('PUT')
 					<button type="submit" class="btn btn-primary">Deactivate</button>
@@ -102,18 +99,18 @@
 	</div>
 </div>
 
-<div class="modal fade" id="activeImplementer" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="activeTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Are you sure you want to activate this implementer?</h5>
+				<h5 class="modal-title">Are you sure you want to activate this testimonial?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
-				<form action="#" method="POST" id="formActiveImplementer">
+				<form action="#" method="POST" id="formActiveTestimonial">
 					@csrf
 					@method('PUT')
 					<button type="submit" class="btn btn-primary">Activate</button>
@@ -123,18 +120,18 @@
 	</div>
 </div>
 
-<div class="modal fade" id="deleteImplementer" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="deleteTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Are you sure you want to delete this implementer?</h5>
+				<h5 class="modal-title">Are you sure you want to delete this testimonial?</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn" data-dismiss="modal">Cancel</button>
-				<form action="#" method="POST" id="formDeleteImplementer">
+				<form action="#" method="POST" id="formDeleteTestimonial">
 					@csrf
 					@method('DELETE')
 					<button type="submit" class="btn btn-primary">Delete</button>

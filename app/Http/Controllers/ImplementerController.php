@@ -18,7 +18,7 @@ class ImplementerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $implementers=User::where('type', 2)->orderBy('id', 'DESC')->get();
+        $implementers=User::where('type', '2')->orderBy('id', 'DESC')->get();
         $num=1;
         return view('admin.implementers.index', compact('implementers', 'num'));
     }
@@ -165,5 +165,37 @@ class ImplementerController extends Controller
         } else {
             return redirect()->route('implementadores.index')->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Failed edit', 'msg' => 'An error occurred durind the process, please try again.']);
         }
+    }
+
+    public function addImplementers($offset=NULL, $limit=NULL) {
+        if (is_null($offset) && is_null($limit)) {
+            $implementers=Implementer::select('implementers.user_id', 'implementers.lat', 'implementers.lng', 'implementers.address')->with('user')->orderBy('id', 'DESC')->get();
+        } else {
+            if (!is_null($offset) && is_null($limit)) {
+                $implementers=Implementer::select('implementers.user_id', 'implementers.lat', 'implementers.lng', 'implementers.address')->with('user')->orderBy('id', 'DESC')->offset($offset)->get();
+            } elseif (is_null($offset) && !is_null($limit)) {
+                $implementers=Implementer::select('implementers.user_id', 'implementers.lat', 'implementers.lng', 'implementers.address')->with('user')->orderBy('id', 'DESC')->limit($limit)->get();
+            } else {
+                $implementers=Implementer::select('implementers.user_id', 'implementers.lat', 'implementers.lng', 'implementers.address')->with('user')->orderBy('id', 'DESC')->offset($offset)->limit($limit)->get();
+            }
+        }
+
+        $total=Implementer::count();
+        $offset=(!is_null($offset)) ? $offset : 0;
+        $count=$implementers->count()+$offset;
+        $last=($total<=$count) ? true : false;
+        
+        $implementers=$implementers->map(function($implementer) {
+            return array("profile" => env('APP_URL').'/implementers/'.$implementer['user']->slug, "name" =>  $implementer['user']->name, "lastname" =>  $implementer['user']->lastname, "photo" => env('APP_URL').'/admins/img/users/'.$implementer['user']->photo, "lat" => $implementer->lat, "lng" => $implementer->lng, "address" =>  $implementer->address);
+        });
+        return response()->json(["data" => $implementers, "last" => $last]);
+    }
+
+    public function search(Request $request) {
+        $implementers=User::with('implementer')->where('slug', 'LIKE', '%'.Str::slug(request('search'), '-').'%')->where('type', '2')->get()->map(function($implementer) {
+            return array("profile" => env('APP_URL').'/implementers/'.$implementer->slug, "name" =>  $implementer->name, "lastname" =>  $implementer->lastname, "photo" => env('APP_URL').'/admins/img/users/'.$implementer->photo, "lat" => $implementer['implementer']->lat, "lng" => $implementer['implementer']->lng, "address" =>  $implementer['implementer']->address);
+        });
+
+        return response()->json(["data" => $implementers]);
     }
 }

@@ -104,6 +104,13 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 */
 
+label.error {
+  width: 100%;
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+}
+
 #header {
   padding: 30px 0;
   height: 120px;
@@ -124,7 +131,7 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   top: 0;
   right: 0;
   background: #ffffff;
-  height: 130px;
+  height: 110px;
   padding: 0;
 }
 
@@ -254,7 +261,7 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 .card-features:hover {
   color: #ffffff !important;
-  background-color: #00263d;
+  background-color: #f5822b;
   transition: all 0.4s;
 }
 
@@ -263,9 +270,17 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   transition: all 0.4s;
 }
 
-.card-implementer img, #basic-profile img {
-  width: calc(15rem + 2px);
-  height: calc(15rem + 2px);
+.registered::after {
+  content: "®";
+  color: #00263d;
+  font-size: 26px;
+  position: absolute;
+  top: 6px;
+}
+
+.card-implementer img {
+  width: 11.5rem;
+  height: 11.5rem;
 }
 
 .card-implementer, .card-vertical-implementer {
@@ -279,11 +294,20 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   font-weight: 400 !important;
 }
 
-#map-implementer .form-control-lg {
+#map-implementer #map {
+  height: 400px;
+}
+
+#map-implementer .form-control-lg, #formSendMessage .form-control-lg, #formRequestCall .form-control-lg {
   height: calc(2.875rem + 2px) !important;
   padding: 0.5rem 1rem;
   line-height: 1.5;
   border-radius: 0.3rem; 
+}
+
+#basic-profile img {
+  width: calc(15rem + 2px);
+  height: calc(15rem + 2px);
 }
 
 .social-media-profile a {
@@ -291,13 +315,12 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   height: 35px;
 }
 
-#testimonials p.testimonial::before {
-  content: '"';
+#testimonials .testimonial > i {
   position: absolute;
-  top: -40px;
-  left: -20px;
+  top: 0px;
+  left: -30px;
   color: #00263d;
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
@@ -309,6 +332,14 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   color: #00263d;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+#testimonialsCarousel .carousel-control-prev {
+  left: -25px !important;
+}
+
+#testimonialsCarousel .carousel-control-next {
+  right: -25px !important;
 }
 
 /*--------------------------------------------------------------
@@ -326,8 +357,13 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #intro h2 {
     font-size: 28px;
+  }
+
+  .registered::after {
+    font-size: 18px;
+    top: 5px;
   }
 }

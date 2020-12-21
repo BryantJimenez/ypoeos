@@ -252,7 +252,7 @@ $(document).ready(function(){
 				experience: {
 					required: true,
 					minlength: 2,
-					maxlength: 16770000
+					maxlength: 5000
 				},
 
 				email: {
@@ -334,7 +334,7 @@ $(document).ready(function(){
 				experience: {
 					required: true,
 					minlength: 2,
-					maxlength: 16770000
+					maxlength: 5000
 				},
 
 				email: {
@@ -496,6 +496,174 @@ $(document).ready(function(){
 			},
 			submitHandler: function(form) {
 				$("button[action='banner']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
+
+	//Testimonios
+	$("button[action='testimonial']").on("click",function(){
+		$("#formTestimonial").validate({
+			rules:
+			{
+				implementer_id: {
+					required: true
+				},
+
+				name: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				title: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				testimonial: {
+					required: true,
+					minlength: 2,
+					maxlength: 1000
+				}
+			},
+			messages:
+			{
+				implementer_id: {
+					required: 'Select an option.'
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='testimonial']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
+
+	//Ajustes
+	$("button[action='setting']").on("click",function(){
+		$("#formSetting").validate({
+			rules:
+			{
+				video: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				feature_one: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				feature_two: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				feature_three: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				feature_four: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				why_works: {
+					required: false,
+					minlength: 2,
+					maxlength: 64000
+				},
+
+				email: {
+					required: true,
+					email: true,
+					minlength: 5,
+					maxlength: 191
+				},
+
+				phone: {
+					required: false,
+					minlength: 5,
+					maxlength: 15
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='setting']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
+
+	// Send Message (Web)
+	$("button[action='send']").on("click",function(){
+		$("#formSendMessage").validate({
+			rules:
+			{
+				name: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				company: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				email: {
+					required: true,
+					email: true,
+					minlength: 5,
+					maxlength: 191
+				},
+
+				phone: {
+					required: true,
+					minlength: 2,
+					maxlength: 15
+				},
+
+				message: {
+					required: true,
+					minlength: 2,
+					maxlength: 64000
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='send']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
+
+	// Request Call (Web)
+	$("button[action='send']").on("click",function(){
+		$("#formRequestCall").validate({
+			rules:
+			{
+				name: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				phone: {
+					required: true,
+					minlength: 2,
+					maxlength: 15
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='send']").attr('disabled', true);
 				form.submit();
 			}
 		});

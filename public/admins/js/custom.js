@@ -227,12 +227,12 @@ $(document).ready(function() {
   //Mapa de leaflet
   if ($('#lat').length && $('#lng').length && $('#map').length) {
     var lat=$('#lat').val(), lng=$('#lng').val();
-    var map = L.map('map', {
+    var map=L.map('map', {
       center: [lat, lng],
       zoom: 7
     });
 
-    marker = L.marker([lat, lng]).addTo(map);
+    marker=L.marker([lat, lng]).addTo(map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -246,12 +246,12 @@ $(document).ready(function() {
       lng=$('#lng').val();
     }
 
-    var map = L.map('map-implementer', {
+    var map=L.map('map-implementer', {
       center: [lat, lng],
       zoom: 5
     });
 
-    marker = L.marker([lat, lng]).addTo(map);
+    marker=L.marker([lat, lng]).addTo(map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -266,6 +266,23 @@ $(document).ready(function() {
       $('#lat').val(e.latlng.lat);
       $('#lng').val(e.latlng.lng);
     });
+  }
+
+  //CKeditor plugin
+  if ($('#why-works').length) {
+    CKEDITOR.config.language='en';
+    CKEDITOR.config.height=400;
+    CKEDITOR.config.width='auto';
+    CKEDITOR.config.removePlugins='image,table,tableselection,tabletools,pastefromword,pastetools,specialchar,about';
+    CKEDITOR.replace('why-works');
+  }
+
+  if ($('#experience').length) {
+    CKEDITOR.config.language='en';
+    CKEDITOR.config.height=200;
+    CKEDITOR.config.width='auto';
+    CKEDITOR.config.removePlugins='image,table,tableselection,tabletools,pastefromword,pastetools,specialchar,about';
+    CKEDITOR.replace('experience');
   }
 });
 
@@ -320,6 +337,16 @@ function activeBanner(slug) {
   $('#formActiveBanner').attr('action', '/admin/banners/' + slug + '/activate');
 }
 
+function deactiveTestimonial(slug) {
+  $("#deactiveTestimonial").modal();
+  $('#formDeactiveTestimonial').attr('action', '/admin/testimonials/' + slug + '/deactivate');
+}
+
+function activeTestimonial(slug) {
+  $("#activeTestimonial").modal();
+  $('#formActiveTestimonial').attr('action', '/admin/testimonials/' + slug + '/activate');
+}
+
 //funciones para preguntar al eliminar
 function deleteAdmin(slug) {
   $("#deleteAdmin").modal();
@@ -334,4 +361,9 @@ function deleteImplementer(slug) {
 function deleteBanner(slug) {
   $("#deleteBanner").modal();
   $('#formDeleteBanner').attr('action', '/admin/banners/' + slug);
+}
+
+function deleteTestimonial(slug) {
+  $("#deleteTestimonial").modal();
+  $('#formDeleteTestimonial').attr('action', '/admin/testimonials/' + slug);
 }

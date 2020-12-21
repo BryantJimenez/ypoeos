@@ -43,6 +43,22 @@
                     </div>
                 </a>
             </li>
+
+            <li class="menu {{ active('admin/testimonials', 0) }}">
+                <a href="{{ route('testimonios.index') }}" aria-expanded="{{ menu_expanded('admin/testimonials', 0) }}" class="dropdown-toggle">
+                    <div class="">
+                        <span><i class="fa fa-quote-left"></i> Testimonials</span>
+                    </div>
+                </a>
+            </li>
+
+            <li class="menu {{ active('admin/settings', 0) }}">
+                <a href="{{ route('ajustes.edit') }}" aria-expanded="{{ menu_expanded('admin/settings', 0) }}" class="dropdown-toggle">
+                    <div class="">
+                        <span><i class="fa fa-cogs"></i> Settings</span>
+                    </div>
+                </a>
+            </li>
         </ul>
 
     </nav>

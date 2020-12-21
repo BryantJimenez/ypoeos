@@ -2,6 +2,10 @@
 
 @section('title', 'Implementer Profile')
 
+@section('links')
+<link rel="stylesheet" href="{{ asset('/admins/vendor/lobibox/Lobibox.min.css') }}">
+@endsection
+
 @section('content')
 
 <section class="ftco-section py-5" id="basic-profile">
@@ -14,8 +18,9 @@
 					</div>
 					<div class="col-xl-7 col-lg-7 col-12 mb-4">
 						<h1 class="card-title text-primary font-weight-bold mt-3">{{ $user->lastname }}, {{ $user->name }}</h1>
-						<p class="mb-0">YPO Gold - Angeleno</p>
-						<p>Certified EOS Implementer</p>
+						<p>{{ $user->implementer->title }}</p>
+						{{-- <p class="mb-0">YPO Gold - Angeleno</p>
+						<p>Certified EOS Implementer</p> --}}
 						<p>{{ $user->implementer->address }}</p>
 						@if(is_null($user->implementer->linkedin) && is_null($user->implementer->facebook) && is_null($user->implementer->twitter))
 						<div class="social-media-profile d-flex flex-wrap">
@@ -38,8 +43,8 @@
 						@endif
 					</div>
 					<div class="col-12">
-						<a href="javascript:void(0);" class="btn btn-blue text-white rounded-4 py-3 px-4 mr-4 mb-2">Send Message</a>
-						<a href="javascript:void(0);" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mr-4 mb-2">Request Call</a>
+						<a href="javascript:void(0);" class="btn btn-blue text-white rounded-4 py-3 px-4 mr-4 mb-2" data-toggle="modal" data-target="#modal-send-message">Send Message</a>
+						<a href="javascript:void(0);" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mr-4 mb-2" data-toggle="modal" data-target="#modal-request-call">Request Call</a>
 						<a href="javascript:void(0);" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mb-2">YPO Link</a>
 					</div>	
 				</div>
@@ -54,26 +59,157 @@
 			<h2 class="text-blue mb-4">Experience</h2>
 		</div>
 		<div class="col-xl-8 col-lg-8 col-12 mx-auto">
-			<p>{{ $user->implementer->experience }}</p>
-			{{-- <p>Mike began his own journey as an entrepreneur when we co-founded a training company in 1993. As CEO, he grew the business with the help of 100+ instructors and staff to be an internationally recognized company with over $20M in revenue and operations in the US and UK.</p>
-			<p>Along his journey, Mike joined the Young President’s Organization (YPO) in 2000. While working closely with business leaders in YPO, Mike discovered a passion and talent for his own teaching and facilitation. As a result, Mike has been professionally delivering programs for YPO groups in the US and internationally since 2007 delivering highly regarded sessions.</p>
-			<p>In 2015, Mike sold his training business to a global IT training organization and exited the business to focus on helping business leaders implement EOS. As a certified EOS implementer Mike combines his business experience and love of teaching to fulfill his dream of helping other entrepreneurs after he was finished with his own business.</p> --}}
+			{!! $user->implementer->experience !!}
 		</div>
 	</div>
 </section>
 
+@if($user->implementer->testimonials->where('state', '1')->count()>0)
 <section class="ftco-section" id="testimonials">
 	<div class="container">
-		<div class="col-xl-6 col-lg-6 col-12 py-5 px-5 mx-auto">
-			<p class="text-blue position-relative testimonial"><i>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</i></p>
-			<div class="row">
-				<div class="offset-lg-6 col-lg-6 col-12">
-					<p class="h5 text-blue font-weight-bold owner-testimonial position-relative mb-0">Sue Hawkes</p>
-					<p class="small">Title / Certified Implementer</p>
+		<div class="row">
+			<div class="col-xl-7 col-lg-7 col-12 py-5 px-5 mx-auto">
+				<div id="testimonialsCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+					<div class="carousel-inner" role="listbox">
+						@foreach($user->implementer->testimonials->where('state', '1') as $testimonial)
+						<div class="carousel-item @if($loop->first) active @endif">
+							<div class="carousel-container">
+								<div class="carousel-content position-relative testimonial pt-3 mx-lg-5">
+									<i class="fa fa-quote-left"></i>
+									<p class="text-blue">
+										<i>{{ $testimonial->testimonial }}</i>
+									</p>
+									<div class="row">
+										<div class="offset-lg-6 col-lg-6 col-12">
+											<p class="h5 text-blue font-weight-bold owner-testimonial position-relative mb-0">{{ $testimonial->name }}</p>
+											@if(!is_null($testimonial->title))
+											<p class="small">{{ $testimonial->title }}</p>
+											@endif
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endforeach
+					</div>
+					<a class="carousel-control-prev" href="#testimonialsCarousel" role="button" data-slide="prev">
+						<span class="fa fa-2x fa-angle-left bg-transparent text-blue p-2" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+
+					<a class="carousel-control-next" href="#testimonialsCarousel" role="button" data-slide="next">
+						<span class="fa fa-2x fa-angle-right bg-transparent text-blue p-2" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+@endif
 
+<div class="modal fade" id="modal-send-message" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<form action="{{ route('implementer.message', ['slug' => $user->slug]) }}" method="POST" id="formSendMessage">
+				@csrf
+				<div class="modal-header">
+					<h5 class="modal-title">Send Message</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-12">
+							@include('admin.partials.errors')
+
+							<p>Required fields (<b class="text-danger">*</b>)</p>
+							<div class="row">
+								<div class="form-group col-lg-6 col-md-6 col-12">
+									<label class="col-form-label">Name<b class="text-danger">*</b></label>
+									<input class="form-control form-control-lg @error('name') is-invalid @enderror" type="text" name="name" required placeholder="Enter a name" value="{{ old('name') }}">
+								</div>
+
+								<div class="form-group col-lg-6 col-md-6 col-12">
+									<label class="col-form-label">Company<b class="text-danger">*</b></label>
+									<input class="form-control form-control-lg @error('company') is-invalid @enderror" type="text" name="company" required placeholder="Enter a company name" value="{{ old('company') }}">
+								</div>
+
+								<div class="form-group col-lg-6 col-md-6 col-12">
+									<label class="col-form-label">Email<b class="text-danger">*</b></label>
+									<input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" name="email" required placeholder="Enter a email" value="{{ old('email') }}">
+								</div>
+
+								<div class="form-group col-lg-6 col-md-6 col-12">
+									<label class="col-form-label">Phone<b class="text-danger">*</b></label>
+									<input class="form-control form-control-lg @error('phone') is-invalid @enderror" type="text" name="phone" required placeholder="Enter a phone" value="{{ old('phone') }}" id="phone">
+								</div>
+
+								<div class="form-group col-12">
+									<label class="col-form-label">Message<b class="text-danger">*</b></label>
+									<textarea class="form-control pl-3 pt-2 @error('message') is-invalid @enderror" name="message" placeholder="Enter a message" rows="4">{{ old('message') }}</textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger rounded" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-blue rounded" action="send">Send</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal-request-call" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<form action="{{ route('implementer.call', ['slug' => $user->slug]) }}" method="POST" id="formRequestCall">
+				@csrf
+				<div class="modal-header">
+					<h5 class="modal-title">Request Call</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-12">
+							@include('admin.partials.errors')
+
+							<p>Required fields (<b class="text-danger">*</b>)</p>
+							<div class="row">
+								<div class="form-group col-12">
+									<label class="col-form-label">Name<b class="text-danger">*</b></label>
+									<input class="form-control form-control-lg @error('name') is-invalid @enderror" type="text" name="name" required placeholder="Enter a name" value="{{ old('name') }}">
+								</div>
+
+								<div class="form-group col-12">
+									<label class="col-form-label">Phone<b class="text-danger">*</b></label>
+									<input class="form-control form-control-lg @error('phone') is-invalid @enderror" type="text" name="phone" required placeholder="Enter a phone" value="{{ old('phone') }}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger rounded" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-blue rounded" action="send">Send</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+@endsection
+
+@section('scripts')
+<script src="{{ asset('/admins/vendor/touchSwipe/jquery.touchSwipe.min.js') }}"></script>
+<script src="{{ asset('/admins/vendor/validate/jquery.validate.js') }}"></script>
+<script src="{{ asset('/admins/vendor/validate/additional-methods.js') }}"></script>
+<script src="{{ asset('/admins/js/validate.js') }}"></script>
+<script src="{{ asset('/admins/vendor/lobibox/Lobibox.js') }}"></script>
 @endsection

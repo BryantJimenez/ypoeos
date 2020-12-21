@@ -34,7 +34,7 @@ class ImplementerStoreRequest extends FormRequest
       'address' => 'required|string|min:2|max:191',
       'lat' => 'required|string|min:2|max:191',
       'lng' => 'required|string|min:2|max:191',
-      'experience' => 'required|string|min:2|max:16770000',
+      'experience' => 'required|string|min:2|max:5000',
       'email' => 'required|string|email|max:191|unique:users,email',
       'facebook' => 'nullable|string|min:2|max:191',
       'twitter' => 'nullable|string|min:2|max:191',

@@ -89,7 +89,7 @@
 					<div class="">
 						<ul class="contacts-block list-unstyled mw-100 mx-2">
 							<li class="contacts-block__item">
-								<span class="h6 text-black">{!! $user->implementer->experience !!}</span>
+								<span class="h6 text-black">{{ $user->implementer->experience }}</span>
 							</li>
 						</ul>
 					</div>

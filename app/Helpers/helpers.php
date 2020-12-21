@@ -141,3 +141,15 @@ function image_exist($file_route, $image, $user_image=false, $large=true) {
 
 	return $img;
 }
+
+function youtubeUrl($url) {
+	$url_new=substr($url, 32);
+	if (is_numeric(strpos($url_new, '&'))) {
+		$end=strpos($url_new, '&');
+		$youtube=substr($url_new, 0, $end);
+	} else {
+		$youtube=substr($url, 32);
+	}
+
+	return "https://www.youtube.com/embed/".$youtube;
+}
