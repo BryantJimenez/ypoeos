@@ -146,6 +146,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'implementer_id'    => 'implementer',
+        'ypo_link'          => 'ypo url',
+        'feature_one'       => 'first feature box text',
+        'feature_two'       => 'second feature box text',
+        'feature_three'     => 'third feature box text',
+        'feature_four'      => 'fourth feature box text',
+        'why_works'         => 'text of why eos works'
+    ],
 
 ];

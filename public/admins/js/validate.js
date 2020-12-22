@@ -266,6 +266,12 @@ $(document).ready(function(){
 					}
 				},
 
+				ypo_link: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
 				facebook: {
 					required: false,
 					minlength: 2,
@@ -341,6 +347,12 @@ $(document).ready(function(){
 					required: true,
 					email: true,
 					minlength: 5,
+					maxlength: 191
+				},
+
+				ypo_link: {
+					required: false,
+					minlength: 2,
 					maxlength: 191
 				},
 

@@ -88,6 +88,11 @@
 								</div>
 
 								<div class="form-group col-lg-6 col-md-6 col-12">
+									<label class="col-form-label">YPO Url (Optional)</label>
+									<input class="form-control @error('ypo_link') is-invalid @enderror" name="ypo_link" placeholder="Enter a ypo url" value="{{ $user->implementer->ypo_link }}">
+								</div>
+
+								<div class="form-group col-lg-6 col-md-6 col-12">
 									<label class="col-form-label">Facebook (Optional)</label>
 									<input class="form-control @error('facebook') is-invalid @enderror" name="facebook" placeholder="Enter a facebook" value="{{ $user->implementer->facebook }}">
 								</div>

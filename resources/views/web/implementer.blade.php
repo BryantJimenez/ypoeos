@@ -13,15 +13,15 @@
 		<div class="row">
 			<div class="col-xl-8 col-lg-8 col-12 mx-auto">
 				<div class="row">
-					<div class="col-xl-5 col-lg-5 col-12 mb-4">
-						<img src="{{ image_exist('/admins/img/users/', $user->photo, true) }}" class="rounded-circle mx-auto" alt="{{ $user->name.' '.$user->lastname }}">
+					<div class="col-xl-5 col-lg-5 col-12 text-center mb-4">
+						<img src="{{ image_exist('/admins/img/users/', $user->photo, true) }}" class="rounded-circle" alt="{{ $user->name.' '.$user->lastname }}">
 					</div>
 					<div class="col-xl-7 col-lg-7 col-12 mb-4">
-						<h1 class="card-title text-primary font-weight-bold mt-3">{{ $user->lastname }}, {{ $user->name }}</h1>
-						<p>{{ $user->implementer->title }}</p>
+						<h1 class="card-title text-primary text-center text-lg-left font-weight-bold mt-3">{{ $user->lastname }}, {{ $user->name }}</h1>
+						<p class="text-center text-lg-left">{{ $user->implementer->title }}</p>
 						{{-- <p class="mb-0">YPO Gold - Angeleno</p>
 						<p>Certified EOS Implementer</p> --}}
-						<p>{{ $user->implementer->address }}</p>
+						<p class="text-center text-lg-left">{{ $user->implementer->address }}</p>
 						@if(is_null($user->implementer->linkedin) && is_null($user->implementer->facebook) && is_null($user->implementer->twitter))
 						<div class="social-media-profile d-flex flex-wrap">
 							@if(!is_null($user->implementer->linkedin))
@@ -42,10 +42,12 @@
 						</div>
 						@endif
 					</div>
-					<div class="col-12">
-						<a href="javascript:void(0);" class="btn btn-blue text-white rounded-4 py-3 px-4 mr-4 mb-2" data-toggle="modal" data-target="#modal-send-message">Send Message</a>
-						<a href="javascript:void(0);" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mr-4 mb-2" data-toggle="modal" data-target="#modal-request-call">Request Call</a>
-						<a href="javascript:void(0);" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mb-2">YPO Link</a>
+					<div class="col-12 d-flex justify-content-center justify-content-lg-start">
+						<a href="javascript:void(0);" class="btn btn-blue text-white rounded-4 py-3 px-4 mr-3 mb-2" data-toggle="modal" data-target="#modal-send-message">Send Message</a>
+						<a href="javascript:void(0);" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mr-3 mb-2" data-toggle="modal" data-target="#modal-request-call">Request Call</a>
+						@if(!is_null($user->implementer->ypo_link))
+						<a href="{{ $user->implementer->ypo_link }}" target="_blank" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mb-2">YPO Link</a>
+						@endif
 					</div>	
 				</div>
 			</div>
@@ -53,7 +55,7 @@
 	</div>
 </section>
 
-<section class="ftco-section bg-light">
+<section class="ftco-section bg-light py-4 pt-md-5">
 	<div class="container">
 		<div class="col-xl-8 col-lg-8 col-12 heading-section mx-auto">
 			<h2 class="text-blue mb-4">Experience</h2>
@@ -65,10 +67,10 @@
 </section>
 
 @if($user->implementer->testimonials->where('state', '1')->count()>0)
-<section class="ftco-section" id="testimonials">
+<section class="ftco-section py-4 pt-md-5" id="testimonials">
 	<div class="container">
 		<div class="row">
-			<div class="col-xl-7 col-lg-7 col-12 py-5 px-5 mx-auto">
+			<div class="col-xl-7 col-lg-7 col-12 py-4 pt-md-5 px-5 mx-auto">
 				<div id="testimonialsCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
 
 					<div class="carousel-inner" role="listbox">

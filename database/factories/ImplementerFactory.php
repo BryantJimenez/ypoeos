@@ -25,6 +25,7 @@ $factory->define(Implementer::class, function (Faker $faker) {
         'lat' => $faker->latitude(34.53371242139567, 48.05605376398125),
         'lng' => $faker->longitude(-78.04687500000001, -121.99218750000001),
         'experience' => $experience,
+        'ypo_link' => 'https://google.com',
         'facebook' => $facebook,
         'twitter' => $twitter,
         'linkedin' => $linkedin,

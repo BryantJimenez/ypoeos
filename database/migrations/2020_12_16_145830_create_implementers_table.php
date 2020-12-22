@@ -20,6 +20,7 @@ class CreateImplementersTable extends Migration
             $table->string('lat');
             $table->string('lng');
             $table->text('experience');
+            $table->string('ypo_link')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();

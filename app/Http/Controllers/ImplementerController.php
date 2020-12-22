@@ -66,7 +66,7 @@ class ImplementerController extends Controller
 
         $user=User::create($data);
 
-        $data=array('title' => request('title'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'), 'user_id' => $user->id);
+        $data=array('title' => request('title'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'ypo_url' => request('ypo_url'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'), 'user_id' => $user->id);
         $implementer=Implementer::create($data);
 
         if ($user && $implementer) {
@@ -117,7 +117,7 @@ class ImplementerController extends Controller
 
         $user->fill($data)->save();
 
-        $data=array('title' => request('title'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'));
+        $data=array('title' => request('title'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'ypo_url' => request('ypo_url'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'));
         $user->implementer->fill($data)->save();
 
         if ($user) {
