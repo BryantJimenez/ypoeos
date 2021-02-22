@@ -232,6 +232,10 @@ $(document).ready(function(){
 				},
 
 				title: {
+					required: true
+				},
+
+				service_area: {
 					required: true,
 					minlength: 2,
 					maxlength: 191
@@ -272,6 +276,12 @@ $(document).ready(function(){
 					maxlength: 191
 				},
 
+				eos_link: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
 				facebook: {
 					required: false,
 					minlength: 2,
@@ -292,6 +302,10 @@ $(document).ready(function(){
 			},
 			messages:
 			{
+				title: {
+					required: 'Select an option.'
+				},
+
 				email: {
 					remote: "This email is already in use."
 				}
@@ -320,6 +334,16 @@ $(document).ready(function(){
 				},
 
 				title: {
+					required: true
+				},
+
+				ypo_chapter: {
+					required: true,
+					minlength: 2,
+					maxlength: 191
+				},
+
+				service_area: {
 					required: true,
 					minlength: 2,
 					maxlength: 191
@@ -356,6 +380,12 @@ $(document).ready(function(){
 					maxlength: 191
 				},
 
+				eos_link: {
+					required: false,
+					minlength: 2,
+					maxlength: 191
+				},
+
 				facebook: {
 					required: false,
 					minlength: 2,
@@ -372,6 +402,12 @@ $(document).ready(function(){
 					required: false,
 					minlength: 2,
 					maxlength: 191
+				}
+			},
+			messages:
+			{
+				title: {
+					required: 'Select an option.'
 				}
 			},
 			submitHandler: function(form) {

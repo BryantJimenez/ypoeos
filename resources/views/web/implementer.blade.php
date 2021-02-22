@@ -17,11 +17,14 @@
 						<img src="{{ image_exist('/admins/img/users/', $user->photo, true) }}" class="rounded-circle" alt="{{ $user->name.' '.$user->lastname }}">
 					</div>
 					<div class="col-xl-7 col-lg-7 col-12 mb-4">
-						<h1 class="card-title text-primary text-center text-lg-left font-weight-bold mt-3">{{ $user->lastname }}, {{ $user->name }}</h1>
-						<p class="text-center text-lg-left">{{ $user->implementer->title }}</p>
-						{{-- <p class="mb-0">YPO Gold - Angeleno</p>
-						<p>Certified EOS Implementer</p> --}}
-						<p class="text-center text-lg-left">{{ $user->implementer->address }}</p>
+						<h1 class="card-title text-primary text-center text-lg-left font-weight-bold">{{ $user->lastname }}, {{ $user->name }}</h1>
+						<p class="h6 text-center text-lg-left mb-3">@if($user->implementer->title==1)<span class="badge badge-orange rounded-pill py-2 px-3">{{ "Certified" }}</span>@else<span class="badge badge badge-secondary rounded-pill py-2 px-3">{{ "Professional" }}</span>@endif</p>
+						<p class="h6 text-center text-lg-left mb-1"><b>YPO Chapter:</b></p>
+						<p class="h6 text-center text-lg-left mb-3">{{ $user->implementer->ypo_chapter }}</p>
+						<p class="h6 text-center text-lg-left mb-1"><b>Service Area:</b></p>
+						<p class="h6 text-center text-lg-left mb-3">{{ $user->implementer->service_area }}</p>
+						<p class="h6 text-center text-lg-left mb-1"><b>Home Base:</b></p>
+						<p class="h6 text-center text-lg-left">{{ $user->implementer->address }}</p>
 						@if(is_null($user->implementer->linkedin) && is_null($user->implementer->facebook) && is_null($user->implementer->twitter))
 						<div class="social-media-profile d-flex flex-wrap">
 							@if(!is_null($user->implementer->linkedin))
@@ -42,11 +45,14 @@
 						</div>
 						@endif
 					</div>
-					<div class="col-12 d-flex justify-content-center justify-content-lg-start">
+					<div class="col-12 d-flex flex-wrap justify-content-center justify-content-lg-start">
 						<a href="javascript:void(0);" class="btn btn-blue text-white rounded-4 py-3 px-4 mr-3 mb-2" data-toggle="modal" data-target="#modal-send-message">Send Message</a>
-						<a href="javascript:void(0);" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mr-3 mb-2" data-toggle="modal" data-target="#modal-request-call">Request Call</a>
+						<a href="javascript:void(0);" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mb-2" data-toggle="modal" data-target="#modal-request-call">Request Call</a>
 						@if(!is_null($user->implementer->ypo_link))
-						<a href="{{ $user->implementer->ypo_link }}" target="_blank" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 mb-2">YPO Link</a>
+						<a href="{{ $user->implementer->ypo_link }}" target="_blank" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 ml-3 mb-2">YPO Link</a>
+						@endif
+						@if(!is_null($user->implementer->eos_link))
+						<a href="{{ $user->implementer->eos_link }}" target="_blank" class="btn btn-white text-blue font-weight-bold rounded-4 border py-3 px-4 ml-3 mb-2">EOS Site</a>
 						@endif
 					</div>	
 				</div>

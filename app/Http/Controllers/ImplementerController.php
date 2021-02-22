@@ -66,7 +66,7 @@ class ImplementerController extends Controller
 
         $user=User::create($data);
 
-        $data=array('title' => request('title'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'ypo_url' => request('ypo_url'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'), 'user_id' => $user->id);
+        $data=array('title' => request('title'), 'ypo_chapter' => request('ypo_chapter'), 'service_area' => request('service_area'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'ypo_link' => request('ypo_link'), 'eos_link' => request('eos_link'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'), 'user_id' => $user->id);
         $implementer=Implementer::create($data);
 
         if ($user && $implementer) {
@@ -117,7 +117,7 @@ class ImplementerController extends Controller
 
         $user->fill($data)->save();
 
-        $data=array('title' => request('title'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'ypo_url' => request('ypo_url'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'));
+        $data=array('title' => request('title'), 'ypo_chapter' => request('ypo_chapter'), 'service_area' => request('service_area'), 'address' => request('address'), 'lat' => request('lat'), 'lng' => request('lng'), 'experience' => request('experience'), 'ypo_link' => request('ypo_link'), 'eos_link' => request('eos_link'), 'facebook' => request('facebook'), 'twitter' => request('twitter'), 'linkedin' => request('linkedin'));
         $user->implementer->fill($data)->save();
 
         if ($user) {
@@ -169,14 +169,14 @@ class ImplementerController extends Controller
 
     public function addImplementers($offset=NULL, $limit=NULL) {
         if (is_null($offset) && is_null($limit)) {
-            $implementers=Implementer::select('implementers.user_id', 'implementers.lat', 'implementers.lng', 'implementers.address')->with('user')->orderBy('id', 'DESC')->get();
+            $implementers=Implementer::join('users', 'users.id', '=', 'implementers.user_id')->select('users.slug', 'users.name', 'users.lastname', 'users.photo', 'implementers.lat', 'implementers.lng', 'implementers.title', 'implementers.ypo_chapter', 'implementers.service_area', 'implementers.address')->orderBy('lastname', 'ASC')->get();
         } else {
             if (!is_null($offset) && is_null($limit)) {
-                $implementers=Implementer::select('implementers.user_id', 'implementers.lat', 'implementers.lng', 'implementers.address')->with('user')->orderBy('id', 'DESC')->offset($offset)->get();
+                $implementers=Implementer::join('users', 'users.id', '=', 'implementers.user_id')->select('users.slug', 'users.name', 'users.lastname', 'users.photo', 'implementers.lat', 'implementers.lng', 'implementers.title', 'implementers.ypo_chapter', 'implementers.service_area', 'implementers.address')->orderBy('lastname', 'ASC')->offset($offset)->get();
             } elseif (is_null($offset) && !is_null($limit)) {
-                $implementers=Implementer::select('implementers.user_id', 'implementers.lat', 'implementers.lng', 'implementers.address')->with('user')->orderBy('id', 'DESC')->limit($limit)->get();
+                $implementers=Implementer::join('users', 'users.id', '=', 'implementers.user_id')->select('users.slug', 'users.name', 'users.lastname', 'users.photo', 'implementers.lat', 'implementers.lng', 'implementers.title', 'implementers.ypo_chapter', 'implementers.service_area', 'implementers.address')->orderBy('lastname', 'ASC')->limit($limit)->get();
             } else {
-                $implementers=Implementer::select('implementers.user_id', 'implementers.lat', 'implementers.lng', 'implementers.address')->with('user')->orderBy('id', 'DESC')->offset($offset)->limit($limit)->get();
+                $implementers=Implementer::join('users', 'users.id', '=', 'implementers.user_id')->select('users.slug', 'users.name', 'users.lastname', 'users.photo', 'implementers.lat', 'implementers.lng', 'implementers.title', 'implementers.ypo_chapter', 'implementers.service_area', 'implementers.address')->orderBy('lastname', 'ASC')->offset($offset)->limit($limit)->get();
             }
         }
 
@@ -186,7 +186,7 @@ class ImplementerController extends Controller
         $last=($total<=$count) ? true : false;
         
         $implementers=$implementers->map(function($implementer) {
-            return array("profile" => env('APP_URL').'/implementers/'.$implementer['user']->slug, "name" =>  $implementer['user']->name, "lastname" =>  $implementer['user']->lastname, "photo" => env('APP_URL').'/admins/img/users/'.$implementer['user']->photo, "lat" => $implementer->lat, "lng" => $implementer->lng, "address" =>  $implementer->address);
+            return array("profile" => env('APP_URL').'/implementers/'.$implementer->slug, "name" =>  $implementer->name, "lastname" =>  $implementer->lastname, "photo" => env('APP_URL').'/admins/img/users/'.$implementer->photo, "lat" => $implementer->lat, "lng" => $implementer->lng, "title" =>  $implementer->title, "ypo_chapter" =>  $implementer->ypo_chapter, "service_area" =>  $implementer->service_area, "address" =>  $implementer->address);
         });
         return response()->json(["data" => $implementers, "last" => $last]);
     }

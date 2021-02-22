@@ -12,13 +12,13 @@
 
 @section('content')
 
-<section class="ftco-section" id="map-implementer">
+<section class="ftco-section py-3 py-lg-5" id="map-implementer">
 	<div class="container">
 		<div class="row">
-			<div class="col-xl-8 col-lg-8 col-md-6 col-12">
+			<div class="col-xl-8 col-lg-8 col-12">
 				<div class="w-100 rounded-3 mb-3" id="map"></div>
 			</div>
-			<div class="col-xl-4 col-lg-4 col-md-6 col-12">
+			<div class="col-xl-4 col-lg-4 col-12">
 				<div class="row">
 					<div class="form-group col-12">
 						<input type="text" class="form-control form-control-lg" placeholder="Search by Name" id="search-name" />
@@ -33,22 +33,25 @@
 </section>
 
 <section class="ftco-section bg-light">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row" id="list-implementers">
 			@foreach($implementers as $implementer)
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-4">
-				<div class="card card-vertical-implementer rounded-3 py-2">
-					<div class="card-body py-4">
+			<div class="col-xl-4 col-lg-6 col-md-6 col-12 my-4">
+				<div class="card card-vertical-implementer rounded-3 py-0">
+					<div class="card-body p-3">
 						<div class="row">
-							<div class="col-lg-5 col-12 mb-4">
-								<img src="{{ image_exist('/admins/img/users/', $implementer->photo, true) }}" class="w-100 h-100 rounded-3" alt="{{ $implementer->name.' '.$implementer->lastname }}">
+							<div class="col-lg-5 col-12 mb-3">
+								<img src="{{ asset('/admins/img/template/usuario.png') }}" data-src="{{ image_exist('/admins/img/users/', $implementer->photo, true) }}" class="lazy rounded-3" alt="{{ $implementer->name.' '.$implementer->lastname }}">
 							</div>
-							<div class="col-lg-7 col-12 mb-4">
-								<h4 class="card-title text-primary font-weight-bold">{{ $implementer->lastname }}, {{ $implementer->name }}</h4>
-								<p class="h6 text-muted mb-4">{{ $implementer->implementer->title }}</p>
-								{{-- <p class="h6 text-muted">YPO Gold - Angeleno</p>
-								<p class="h6 text-muted mb-4">Certified EOS Implementer</p> --}}
-								<p class="h6 text-muted">{{ $implementer->implementer->address }}</p>
+							<div class="col-lg-7 col-12 mb-3">
+								<h4 class="card-title text-primary font-weight-bold mb-1">{{ $implementer->lastname }}, {{ $implementer->name }}</h4>
+								<p class="h6 text-muted mb-2">@if($implementer->implementer->title==1)<span class="badge badge-orange rounded-pill py-2 px-3">{{ "Certified" }}</span>@else<span class="badge badge-secondary rounded-pill py-2 px-3">{{ "Professional" }}</span>@endif</p>
+								<p class="h6 text-muted mb-0"><b>YPO Chapter:</b></p>
+								<p class="h6 text-muted small mb-2">{{ $implementer->implementer->ypo_chapter }}</p>
+								<p class="h6 text-muted mb-0"><b>Service Area:</b></p>
+								<p class="h6 text-muted small mb-2">{{ $implementer->implementer->service_area }}</p>
+								<p class="h6 text-muted mb-0"><b>Home Base:</b></p>
+								<p class="h6 text-muted small mb-0">{{ $implementer->implementer->address }}</p>
 							</div>
 							<div class="col-12">
 								<a href="javascript:void(0);" class="btn btn-blue text-white rounded-3 py-2 px-4 mr-4 mb-2" onclick="sendMessageModal('{{ $implementer->slug }}')">Send Message</a>
@@ -60,12 +63,14 @@
 			</div>
 			@endforeach
 		</div>
+		@if($all==false)
 		<div class="row">
 			<div class="col-12 text-center my-4">
 				<a href="javaScript:void(0);" class="font-weight-bold" id="more-implementers">View More</a>
 				<p class="text-center d-none" id="loader-more-implementers"><i class="fas fa-spinner fa-pulse text-primary"></i></p>
 			</div>
 		</div>
+		@endif
 	</div>
 </section>
 
@@ -127,6 +132,7 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript" src="{{ asset('/admins/vendor/lazyload/lazyload.min.js') }}"></script>
 <script src="{{ asset('/admins/vendor/leaflet/leaflet.js') }}"></script>
 <script src="{{ asset('/admins/vendor/leaflet/clusters/leaflet.markercluster.js') }}"></script>
 <script src="{{ asset('/admins/vendor/leaflet/geosearch/bundle.min.js') }}"></script>

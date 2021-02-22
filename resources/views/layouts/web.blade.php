@@ -18,17 +18,21 @@
 	{{-- <meta name="twitter:site" content="" />
 	<meta name="twitter:creator" content="" /> --}}
 
-	{{-- <link rel="icon" href="{{ asset('/auth/images/icons/favicon.ico') }}" type="image/x-icon" /> --}}
+	<link rel="icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon" />
 
+	@if(config('app.env')!="production")
 	<!-- Font Awesome -->
-	<link rel="dns-prefetch" href="https://fonts.gstatic.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('/web/css/fontawesome/all.min.css') }}">
+	<!-- Monserrat -->
+	{{-- <link rel="stylesheet" href="{{ asset('/web/css/monserrat.css') }}"> --}}
 	<!-- Bootstrap core CSS -->
-	<link href="{{ asset('/web/css/bootstrap.css') }}" rel="stylesheet">
+	<link href="{{ asset('/web/css/bootstrap.min.css') }}" rel="stylesheet">
 	
 	@yield('links')
+	@else
+	<link rel="stylesheet" href="{{ asset('/web/assets/main.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('/web/assets/plugins.min.css') }}">
+	@endif
 
 	<!-- Style CSS -->
 	<link href="{{ asset('/web/css/style.css') }}" rel="stylesheet">
@@ -44,6 +48,7 @@
 	
 	@include('web.partials.loader')
 
+	@if(config('app.env')!="production")
 	<!-- JQuery -->
 	<script type="text/javascript" src="{{ asset('/web/js/jquery-3.4.1.min.js') }}"></script>
 	<!-- Bootstrap tooltips -->
@@ -52,12 +57,12 @@
 	<script type="text/javascript" src="{{ asset('/web/js/bootstrap.min.js') }}"></script>
 
 	@yield('scripts')
+	@else
+	<script type="text/javascript" src="{{ asset('/web/assets/main.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/web/assets/plugins.min.js') }}"></script>
+	@endif
 
 	<!-- Scripts -->
-	<script src="{{ asset('/admins/vendor/validate/jquery.validate.js') }}"></script>
-	<script src="{{ asset('/admins/vendor/validate/additional-methods.js') }}"></script>
-	<script src="{{ asset('/admins/vendor/validate/messages_es.js') }}"></script>
-	<script src="{{ asset('/admins/js/validate.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/web/js/script.js') }}"></script>
 	@include('admin.partials.notifications')
 </body>

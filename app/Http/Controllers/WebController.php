@@ -21,17 +21,23 @@ class WebController extends Controller
     public function index() {
         $setting=Setting::where('id', 1)->firstOrFail();
     	$banners=Banner::where('state', '1')->orderBy('id', 'DESC')->get();
-    	$implementers=User::where('type', '2')->where('state', '1')->orderBy('id', 'DESC')->limit(4)->get();
+    	$implementers=User::where([['type', '2'], ['state', '1']])->orderBy('lastname', 'ASC')->limit(4)->get();
         return view('web.home', compact('setting', 'banners', 'implementers'));
     }
 
-    public function implementers() {
-        $implementers=User::where('type', '2')->where('state', '1')->orderBy('id', 'DESC')->limit(6)->get();
-        return view('web.implementers', compact('implementers'));
+    public function implementers(Request $request) {
+        $all=false;
+        if ($request->has('all') && request('all')==true) {
+            $all=true;
+            $implementers=User::with(['implementer'])->where([['type', '2'], ['state', '1']])->orderBy('lastname', 'ASC')->get();
+        } else {
+            $implementers=User::with(['implementer'])->where([['type', '2'], ['state', '1']])->orderBy('lastname', 'ASC')->limit(6)->get();
+        }
+        return view('web.implementers', compact('implementers', 'all'));
     }
 
     public function implementer($slug) {
-    	$user=User::where('slug', $slug)->firstOrFail();
+    	$user=User::where([['slug', $slug], ['type', '2'], ['state', '1']])->firstOrFail();
         return view('web.implementer', compact('user'));
     }
 

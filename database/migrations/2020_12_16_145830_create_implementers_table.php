@@ -15,12 +15,15 @@ class CreateImplementersTable extends Migration
     {
         Schema::create('implementers', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->enum('title', [1, 2])->default(1);
+            $table->string('ypo_chapter');
+            $table->string('service_area');
             $table->string('address');
             $table->string('lat');
             $table->string('lng');
             $table->text('experience');
             $table->string('ypo_link')->nullable();
+            $table->string('eos_link')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();

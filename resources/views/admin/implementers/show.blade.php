@@ -54,7 +54,13 @@
 					<div class="">
 						<ul class="contacts-block list-unstyled mw-100 mx-2">
 							<li class="contacts-block__item">
-								<span class="h6 text-black"><b>Job Title:</b> {{ $user->implementer->title }}</span>
+								<span class="h6 text-black"><b>Title:</b> @if($user->implementer->title==1){{ "Certified" }}@else{{ "Professional" }}@endif</span>
+							</li>
+							<li class="contacts-block__item">
+								<span class="h6 text-black"><b>YPO Chapter:</b> {{ $user->implementer->ypo_chapter }}</span>
+							</li>
+							<li class="contacts-block__item">
+								<span class="h6 text-black"><b>Service Area:</b> {{ $user->implementer->service_area }}</span>
 							</li>
 							<li class="contacts-block__item">
 								<span class="h6 text-black"><b>Address:</b> {{ $user->implementer->address }}</span>
@@ -67,6 +73,12 @@
 							</li>
 							<li class="contacts-block__item">
 								<span class="h6 text-black"><b>Linkedin:</b> @if(!is_null($user->implementer->linkedin) && !empty($user->implementer->linkedin)){{ $user->implementer->linkedin }}@else{{ "Not entered" }}@endif</span>
+							</li>
+							<li class="contacts-block__item">
+								<span class="h6 text-black"><b>YPO Url:</b> @if(!is_null($user->implementer->ypo_link) && !empty($user->implementer->ypo_link)){{ $user->implementer->ypo_link }}@else{{ "Not entered" }}@endif</span>
+							</li>
+							<li class="contacts-block__item">
+								<span class="h6 text-black"><b>EOS Url:</b> @if(!is_null($user->implementer->eos_link) && !empty($user->implementer->eos_link)){{ $user->implementer->eos_link }}@else{{ "Not entered" }}@endif</span>
 							</li>
 							<li class="contacts-block__item">
 								<a href="{{ route('implementadores.index') }}" class="btn btn-secondary">Go Back</a>

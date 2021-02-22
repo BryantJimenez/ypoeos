@@ -1,5 +1,5 @@
 body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
-  font-family: "Montserrat";
+  font-family: Arial;
 }
 
 .lh-4 {
@@ -30,6 +30,11 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   background-color: #cccbc9 !important;
 }
 
+.badge-orange {
+  color: #ffffff;
+  background-color: #f5822b !important;
+}
+
 .text-orange {
   color: #f5822b !important;
 }
@@ -49,27 +54,25 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   border-color: #00263d; 
 }
 .btn-orange:focus, .btn-orange.focus {
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); 
+  -webkit-box-shadow: 0 0 0 0.2rem #f5822b63;
+  box-shadow: 0 0 0 0.2rem #f5822b63; 
 }
-/*
-.btn-primary.disabled, .btn-primary:disabled {
+.btn-orange.disabled, .btn-orange:disabled {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff; 
+  background-color: #f5822bd9;
+  border-color: #f5822bd9; 
 }
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
+.btn-orange:not(:disabled):not(.disabled):active, .btn-orange:not(:disabled):not(.disabled).active,
+.show > .btn-orange.dropdown-toggle {
   color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf; 
+  background-color: #00263d;
+  border-color: #00263d; 
 }
-.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); 
+.btn-orange:not(:disabled):not(.disabled):active:focus, .btn-orange:not(:disabled):not(.disabled).active:focus,
+.show > .btn-orange.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem #f5822bd9;
+  box-shadow: 0 0 0 0.2rem #f5822bd9; 
 }
-*/
 
 .btn-blue {
   color: #fff;
@@ -82,27 +85,25 @@ body, h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
   border-color: #00263d; 
 }
 .btn-blue:focus, .btn-blue.focus {
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); 
+  -webkit-box-shadow: 0 0 0 0.2rem #00263d70;
+  box-shadow: 0 0 0 0.2rem #00263d70; 
 }
-/*
-.btn-primary.disabled, .btn-primary:disabled {
+.btn-blue.disabled, .btn-blue:disabled {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff; 
+  background-color: #00263dcc;
+  border-color: #00263dcc; 
 }
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
+.btn-blue:not(:disabled):not(.disabled):active, .btn-blue:not(:disabled):not(.disabled).active,
+.show > .btn-blue.dropdown-toggle {
   color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf; 
+  background-color: #011d2d;
+  border-color: #011d2d; 
 }
-.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); 
+.btn-blue:not(:disabled):not(.disabled):active:focus, .btn-blue:not(:disabled):not(.disabled).active:focus,
+.show > .btn-blue.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem #00263d70;
+  box-shadow: 0 0 0 0.2rem #00263d70; 
 }
-*/
 
 label.error {
   width: 100%;
@@ -135,16 +136,21 @@ label.error {
   padding: 0;
 }
 
+#header img {
+  width: 155px;
+  height: 115px;
+}
+
 #intro {
   display: table;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   background: #000;
 }
 
 #intro .carousel-item {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -255,8 +261,12 @@ label.error {
 }
 
 #intro .btn-outline-light:hover {
-  background: #00263d;
-  border-color: #00263d;
+  background: #f5822b;
+  border-color: #f5822b;
+}
+
+.card-features {
+  min-height: 160px;
 }
 
 .card-features:hover {
@@ -270,12 +280,16 @@ label.error {
   transition: all 0.4s;
 }
 
+.card-features p {
+  font-size: 14px !important;
+}
+
 .registered::after {
   content: "®";
   color: #00263d;
-  font-size: 26px;
+  font-size: 22px;
   position: absolute;
-  top: 6px;
+  top: 2px;
 }
 
 .card-implementer img {
@@ -283,8 +297,27 @@ label.error {
   height: 11.5rem;
 }
 
-.card-implementer, .card-vertical-implementer {
+.card-vertical-implementer img {
+  width: 100%;
+  height: 150px;
+}
+
+.card-implementer {
+  min-height: 550px;
   box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.3) !important;
+}
+
+.card-vertical-implementer {
+  min-height: 360px;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.3) !important;
+}
+
+.card-implementer h4, .card-vertical-implementer h4 {
+  font-size: 1.3rem;
+}
+
+.card-implementer p.small, .card-vertical-implementer p.small {
+  font-size: 14px !important;
 }
 
 .card-vertical-implementer .btn-white:hover, #basic-profile .btn-white:hover {
@@ -342,28 +375,170 @@ label.error {
   right: -25px !important;
 }
 
+.banner-logos {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  z-index: 2;
+}
+
 /*--------------------------------------------------------------
 # Responsive Media Queries
 --------------------------------------------------------------*/
-
 @media (min-width: 1024px) {
   #intro p {
     width: 60%;
   }
 
-  #intro .carousel-control-prev,
-  #intro .carousel-control-next {
+  #intro .carousel-control-prev, #intro .carousel-control-next {
     width: 5%;
   }
 }
 
-@media (max-width: 767px) {
+@media (min-width: 1200px) {
+  .why-work {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 1300px) {
+  .card-implementer {
+    margin-left: .5rem;
+    margin-right: .5rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .card-implementer {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 1100px) {
   #intro h2 {
-    font-size: 28px;
+    font-size: 34px;
+  }
+
+  #intro h4 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 991px) {
+  #header {
+    padding: 0;
+  }
+
+  #header.header-absolute {
+    height: 90px;
+  }
+
+  #header.header-absolute img {
+    width: 130px;
+    height: 90px;
+  }
+
+  #intro {
+    height: 60vh;
+  }
+
+  #intro .carousel-item {
+    height: 60vh;
+  }
+
+  #intro h2 {
+    font-size: 24px;
+  }
+
+  #intro h4 {
+    font-size: 20px;
+  }
+
+  .card-implementer {
+    min-height: 535px;
+  }
+
+  .card-vertical-implementer {
+    min-height: 640px;
+  }
+  
+  .card-vertical-implementer img {
+    height: 300px;
+  }
+
+  .banner-logos {
+    top: 10px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  #header.header-absolute {
+    height: 70px;
+  }
+
+  #header.header-absolute img {
+    width: 110px;
+    height: 70px;
+  }
+
+  #intro {
+    height: 40vh;
+  }
+
+  #intro .carousel-item {
+    height: 40vh;
+  }
+
+  #intro h2 {
+    font-size: 18px;
+  }
+
+  #intro h4 {
+    font-size: 14px;
+  }
+
+  #intro .btn-outline-light {
+    font-size: 14px;
   }
 
   .registered::after {
     font-size: 18px;
     top: 5px;
+  }
+
+  .card-vertical-implementer {
+    min-height: 360px;
+  }
+
+  .card-vertical-implementer img {
+    height: 100%;
+  }
+
+  .banner-logos img:nth-child(1) {
+    width: 70px;
+  }
+
+  .banner-logos img:nth-child(2) {
+    width: 50px;
+  }
+}
+
+@media (max-width: 425px) {
+  #intro h2 {
+    font-size: 16px;
+  }
+
+  #intro h4 {
+    font-size: 12px;
+  }
+
+  #intro .btn-outline-light {
+    font-size: 12px;
+  }
+
+  .banner-logos {
+    display: none;
   }
 }

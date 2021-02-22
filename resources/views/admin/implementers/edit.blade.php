@@ -56,8 +56,22 @@
 								</div>
 
 								<div class="form-group col-lg-6 col-md-6 col-12">
-									<label class="col-form-label">Job Title<b class="text-danger">*</b></label>
-									<input class="form-control @error('title') is-invalid @enderror" type="text" name="title" required placeholder="Enter a job title" value="{{ $user->implementer->title }}">
+									<label class="col-form-label">Certified or Professional<b class="text-danger">*</b></label>
+									<select class="form-control @error('title') is-invalid @enderror" name="title" required>
+										<option value="">Select</option>
+										<option @if($user->implementer->title==1) selected @endif value="1">Certified</option>
+										<option @if($user->implementer->title==2) selected @endif value="2">Professional</option>
+									</select>
+								</div>
+
+								<div class="form-group col-lg-6 col-md-6 col-12">
+									<label class="col-form-label">YPO Chapter<b class="text-danger">*</b></label>
+									<input class="form-control @error('ypo_chapter') is-invalid @enderror" type="text" name="ypo_chapter" required placeholder="Enter a YPO chapter" value="{{ $user->implementer->ypo_chapter }}">
+								</div>
+
+								<div class="form-group col-lg-6 col-md-6 col-12">
+									<label class="col-form-label">Service Area<b class="text-danger">*</b></label>
+									<input class="form-control @error('service_area') is-invalid @enderror" type="text" name="service_area" required placeholder="Enter a service area" value="{{ $user->implementer->service_area }}">
 								</div>
 
 								<div class="form-group col-lg-6 col-md-6 col-12">
@@ -90,6 +104,11 @@
 								<div class="form-group col-lg-6 col-md-6 col-12">
 									<label class="col-form-label">YPO Url (Optional)</label>
 									<input class="form-control @error('ypo_link') is-invalid @enderror" name="ypo_link" placeholder="Enter a ypo url" value="{{ $user->implementer->ypo_link }}">
+								</div>
+
+								<div class="form-group col-lg-6 col-md-6 col-12">
+									<label class="col-form-label">EOS Url (Optional)</label>
+									<input class="form-control @error('eos_link') is-invalid @enderror" name="eos_link" placeholder="Enter a eos url" value="{{ $user->implementer->eos_link }}">
 								</div>
 
 								<div class="form-group col-lg-6 col-md-6 col-12">
